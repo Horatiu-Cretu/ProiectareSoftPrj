@@ -1,0 +1,111 @@
+POST http://localhost:8081/api/user/register
+Content-Type: application/json
+Content-Length: 113
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "name": "Horatiu Cretu 7",
+  "email": "hroatiu9@ex.com",
+  "password": "password123",
+  "roleName" : "USER"
+}
+
+<> 2025-03-26T171913.201.txt
+
+###
+
+POST http://localhost:8081/api/user/register
+Content-Type: application/json
+Content-Length: 110
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "name": "Horatiu Cretu",
+  "email": "hroatiu@ex.com",
+  "password": "password123",
+  "roleName" : "USER"
+}
+
+###
+
+POST http://localhost:8081/api/friends/send-request
+Content-Type: application/json
+Content-Length: 40
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "idSender": 34,
+  "idReceiver": 29
+}
+
+###
+
+POST http://localhost:8081/api/friends/accept-request
+Content-Type: application/json
+Content-Length: 49
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+    "receiverEmail": "razvy.pyrv@example.com"
+}
+
+###
+
+POST http://localhost:8081/api/user/register
+Content-Type: application/json
+Content-Length: 110
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "name": "Horatiu Cretu",
+  "email": "hroatiu@ex.com",
+  "password": "password123",
+  "roleName" : "USER"
+}
+
+###
+
+POST http://localhost:8081/api/user/register
+Content-Type: application/json
+Content-Length: 112
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id": 1,
+  "name": "dsfds",
+  "email": "sdfsd@asdsad.com",
+  "password": "dasdsa123",
+  "roleName": "USER"
+}
+
+###
+
+POST http://localhost:8081/api/user/register
+Content-Type: application/json
+Content-Length: 112
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id": 1,
+  "name": "dsfds",
+  "email": "sdfsd@asdsad.com",
+  "password": "dasdsa123",
+  "roleName": "USER"
+}
+
+###
+

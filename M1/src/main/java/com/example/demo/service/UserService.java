@@ -10,10 +10,14 @@ import com.example.demo.errorhandler.UserException;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.validator.UserFieldValidator;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -23,10 +27,19 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-
+    @Autowired
     private final RoleRepository roleRepository;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
     private final UserRepository userRepository;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+     @Autowired
+    private JWTService jwtService;
 
     public List<UserViewDTO> findAllUserView() {
 
@@ -37,7 +50,7 @@ public class UserService {
 
     public UserViewDTO findUserViewById(Long id) throws UserException {
 
-        Optional<User> user  = userRepository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
             throw new UserException("User not found with id field: " + id);
@@ -46,7 +59,7 @@ public class UserService {
     }
 
     public UserViewDTO findUserViewByEmail(String email) throws UserException {
-        Optional<User> user  = userRepository.findUserByEmail(email);
+        Optional<User> user = userRepository.findUserByEmail(email);
 
         if (user.isEmpty()) {
             throw new UserException("User not found with email field: " + email);
@@ -54,11 +67,11 @@ public class UserService {
         return UserViewBuilder.generateDTOFromEntity(user.get());
     }
 
+
     public Long createUser(UserDTO userDTO) throws UserException {
         List<String> errors = UserFieldValidator.validateInsertOrUpdate(userDTO);
 
-        if(!errors.isEmpty())
-        {
+        if (!errors.isEmpty()) {
             throw new UserException(StringUtils.collectionToDelimitedString(errors, "\n"));
         }
 
@@ -69,7 +82,7 @@ public class UserService {
         }
 
         Optional<User> user = userRepository.findUserByEmail(userDTO.getEmail());
-        if(user.isPresent() ){
+        if (user.isPresent()) {
             throw new UserException("User record does not permit duplicates for email field: " + userDTO.getEmail());
         }
 
@@ -78,12 +91,10 @@ public class UserService {
         return userRepository.save(userSave).getId();
     }
 
-
     public Long updateUser(UserDTO userDTO) throws UserException {
         List<String> errors = UserFieldValidator.validateInsertOrUpdate(userDTO);
 
-        if(!errors.isEmpty())
-        {
+        if (!errors.isEmpty()) {
             throw new UserException(StringUtils.collectionToDelimitedString(errors, "\n"));
         }
 
@@ -94,15 +105,14 @@ public class UserService {
         }
 
         Optional<User> user = userRepository.findById(userDTO.getId());
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             throw new UserException("User not found with id field: " + userDTO.getId());
         }
 
 
-        if(!user.get().getEmail().equals(userDTO.getEmail()))
-        {
+        if (!user.get().getEmail().equals(userDTO.getEmail())) {
             Optional<User> verifyDuplicated = userRepository.findUserByEmail(userDTO.getEmail());
-            if(verifyDuplicated.isPresent() ){
+            if (verifyDuplicated.isPresent()) {
                 throw new UserException("User record does not permit duplicates for email field: " + userDTO.getEmail());
             }
         }
@@ -127,13 +137,47 @@ public class UserService {
     }
 
     public List<UserViewDTO> findUserViewByRoleName(String roleName) throws UserException {
-        List<User> userList  = userRepository.findUserByRoleName(roleName);
+        List<User> userList = userRepository.findUserByRoleName(roleName);
 
         if (userList.isEmpty()) {
             throw new UserException("User not found with role name field: " + roleName);
         }
-        return  userList.stream()
+        return userList.stream()
                 .map(UserViewBuilder::generateDTOFromEntity)
                 .collect(Collectors.toList());
     }
+
+    public User register(User user) {
+        // Encrypt password before saving
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        // Save user to database
+        return userRepository.save(user);
+    }
+
+    public String login(User user) {
+        try {
+            // Authenticate using email and password
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+            );
+
+            // If authentication is successful, generate and return token
+            if (authentication.isAuthenticated()) {
+                Optional<User> existingUser = userRepository.findUserByEmail(user.getEmail());
+
+                if (existingUser.isPresent()) {
+                    return jwtService.generateToken(existingUser.get().getEmail());
+                }
+
+                throw new RuntimeException("User not found");
+            }
+
+            throw new RuntimeException("Authentication failed");
+        } catch (AuthenticationException e) {
+            throw new RuntimeException("Invalid email or password", e);
+        }
+    }
+
+
 }
+
