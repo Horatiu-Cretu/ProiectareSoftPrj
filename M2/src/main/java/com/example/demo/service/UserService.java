@@ -35,6 +35,11 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public User getUserById(Long userId) throws UserException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserException("User not found with id: " + userId));
+    }
+
     public UserViewDTO findUserViewById(Long id) throws UserException {
 
         Optional<User> user  = userRepository.findById(id);

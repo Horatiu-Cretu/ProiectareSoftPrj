@@ -4,423 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6624b52-5590-4e7b-8aa8-ed32fb93117b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ProiectareSoftPrj.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/5d18c37d-6a1a-4641-b509-3eb786dceded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/5d18c37d-6a1a-4641-b509-3eb786dceded/storage_v2/_src_/schema/mydb.Kl8zAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/659f353b-6ed5-4841-828d-04ac1d643bf1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/659f353b-6ed5-4841-828d-04ac1d643bf1/storage_v2/_src_/schema/mydb.Kl8zAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a44f3212-798c-4270-89c4-04d24dc04dad.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a44f3212-798c-4270-89c4-04d24dc04dad/storage_v2/_src_/schema/mydb.Kl8zAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/HELP.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/demo.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/builder/userbuilder/UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/config/SecurityConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/roledto/RoleDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/Role$RoleBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/UserPrincipal.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/errorhandler/DemoException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/errorhandler/HttpErrorResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/errorhandler/UserException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1.war" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1.war.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role$RoleBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/DemoException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/UserException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/HikariCP-5.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/angus-activation-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/antlr4-runtime-4.10.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/aspectjweaver-1.9.19.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/byte-buddy-1.14.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/classmate-1.5.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/h2-2.2.220.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/hibernate-commons-annotations-6.0.6.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/hibernate-core-6.2.6.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/hsqldb-2.7.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/istack-commons-runtime-4.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-annotations-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-core-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-databind-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jdk8-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jsr310-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-module-parameter-names-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.activation-api-2.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.annotation-api-2.1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.inject-api-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.transaction-api-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.xml.bind-api-4.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jandex-3.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jaxb-core-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jaxb-runtime-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jboss-logging-3.5.3.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jul-to-slf4j-2.0.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/log4j-api-2.20.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/log4j-to-slf4j-2.20.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/logback-classic-1.4.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/logback-core-1.4.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/micrometer-commons-1.11.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/micrometer-observation-1.11.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/mysql-connector-j-8.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/slf4j-api-2.0.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/snakeyaml-1.33.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-aop-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-aspects-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-beans-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-autoconfigure-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-aop-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-data-jpa-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-jdbc-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-json-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-logging-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-tomcat-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-web-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-context-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-core-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-data-commons-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-data-jpa-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-expression-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-jcl-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-jdbc-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-orm-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-tx-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-web-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-webmvc-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-core-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-el-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-websocket-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/txw2-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/test-classes/application-db-mem.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/DemoApplicationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/service/BaseTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/service/UserServiceTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/utils/DataTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/HELP.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/builder/userbuilder/UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/dto/roledto/RoleDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/dto/userdto/UserDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/entity/Role$RoleBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/entity/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/errorhandler/DemoException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/errorhandler/HttpErrorResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/errorhandler/UserException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1.war" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1.war.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role$RoleBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/DemoException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/UserException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/HikariCP-5.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/angus-activation-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/antlr4-runtime-4.10.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/aspectjweaver-1.9.19.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/byte-buddy-1.14.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/classmate-1.5.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/h2-2.2.220.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/hibernate-commons-annotations-6.0.6.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/hibernate-core-6.2.6.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/hsqldb-2.7.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/istack-commons-runtime-4.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jackson-annotations-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jackson-core-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jackson-databind-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jdk8-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jsr310-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jackson-module-parameter-names-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jakarta.activation-api-2.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jakarta.annotation-api-2.1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jakarta.inject-api-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jakarta.transaction-api-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jakarta.xml.bind-api-4.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jandex-3.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jaxb-core-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jaxb-runtime-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jboss-logging-3.5.3.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/jul-to-slf4j-2.0.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/log4j-api-2.20.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/log4j-to-slf4j-2.20.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/logback-classic-1.4.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/logback-core-1.4.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/micrometer-commons-1.11.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/micrometer-observation-1.11.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/mysql-connector-j-8.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/slf4j-api-2.0.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/snakeyaml-1.33.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-aop-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-aspects-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-beans-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-autoconfigure-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-aop-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-data-jpa-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-jdbc-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-json-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-logging-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-tomcat-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-web-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-context-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-core-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-data-commons-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-data-jpa-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-expression-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-jcl-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-jdbc-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-orm-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-tx-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-web-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/spring-webmvc-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-core-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-el-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-websocket-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/lib/txw2-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/test-classes/application-db-mem.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/test-classes/com/example/demo/DemoApplicationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/test-classes/com/example/demo/service/BaseTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/test-classes/com/example/demo/service/UserServiceTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M2/target/test-classes/com/example/demo/utils/DataTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/HELP.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/builder/userbuilder/UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/dto/roledto/RoleDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/dto/userdto/UserDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/entity/Role$RoleBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/entity/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/errorhandler/DemoException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/errorhandler/HttpErrorResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/errorhandler/UserException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1.war" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1.war.original" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/controller/UserController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role$RoleBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/DemoException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/UserException.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/RoleRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/UserRepository.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/HikariCP-5.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/angus-activation-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/antlr4-runtime-4.10.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/aspectjweaver-1.9.19.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/byte-buddy-1.14.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/classmate-1.5.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/h2-2.2.220.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/hibernate-commons-annotations-6.0.6.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/hibernate-core-6.2.6.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/hsqldb-2.7.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/istack-commons-runtime-4.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jackson-annotations-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jackson-core-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jackson-databind-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jdk8-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jsr310-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jackson-module-parameter-names-2.15.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jakarta.activation-api-2.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jakarta.annotation-api-2.1.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jakarta.inject-api-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jakarta.transaction-api-2.0.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jakarta.xml.bind-api-4.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jandex-3.0.5.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jaxb-core-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jaxb-runtime-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jboss-logging-3.5.3.Final.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/jul-to-slf4j-2.0.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/log4j-api-2.20.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/log4j-to-slf4j-2.20.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/logback-classic-1.4.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/logback-core-1.4.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/micrometer-commons-1.11.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/micrometer-observation-1.11.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/mysql-connector-j-8.2.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/slf4j-api-2.0.7.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/snakeyaml-1.33.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-aop-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-aspects-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-beans-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-autoconfigure-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-aop-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-data-jpa-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-jdbc-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-json-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-logging-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-tomcat-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-web-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-context-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-core-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-data-commons-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-data-jpa-3.1.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-expression-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-jcl-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-jdbc-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-orm-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-tx-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-web-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/spring-webmvc-6.0.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-core-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-el-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-websocket-10.1.11.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/demo-0.0.1/WEB-INF/lib/txw2-4.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/test-classes/application-db-mem.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/test-classes/com/example/demo/DemoApplicationTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/test-classes/com/example/demo/service/BaseTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/test-classes/com/example/demo/service/UserServiceTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/M3/target/test-classes/com/example/demo/utils/DataTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b6624b52-5590-4e7b-8aa8-ed32fb93117b" name="Changes" comment="Added Register Login and friedRequests">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/922ed0da-0546-433a-8b1e-4aaf03d02819.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/922ed0da-0546-433a-8b1e-4aaf03d02819.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpClient.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpClient.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/M1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/builder/userbuilder/UserBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/builder/userbuilder/UserViewBuilder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/roledto/RoleDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/userdto/UserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/userdto/UserViewDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/validator/UserFieldValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/test/java/com/example/demo/service/UserServiceTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/test/java/com/example/demo/utils/DataTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M3/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -431,8 +21,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
-        <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -495,7 +86,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;swagger&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -509,7 +100,7 @@
       <recent name="com.example.demo.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.DemoApplication">
+  <component name="RunManager" selected="Spring Boot.DemoApplication (1)">
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -543,8 +134,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
       </set>
     </attachedChunks>
   </component>
@@ -578,12 +169,40 @@
       <workItem from="1742928065226" duration="685000" />
       <workItem from="1742935307875" duration="4150000" />
       <workItem from="1742939502655" duration="4129000" />
-      <workItem from="1743001768410" duration="4323000" />
+      <workItem from="1743001768410" duration="4646000" />
+      <workItem from="1743096030760" duration="611000" />
+      <workItem from="1743836878025" duration="171000" />
+      <workItem from="1743837187007" duration="641000" />
+      <workItem from="1743837838737" duration="9737000" />
     </task>
+    <task id="LOCAL-00001" summary="Added Register Login and friedRequests">
+      <option name="closed" value="true" />
+      <created>1743010720335</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743010720335</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Register Login and friedRequests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Register Login and friedRequests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
