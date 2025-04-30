@@ -141,4 +141,16 @@ public class UserService {
                 .map(UserViewBuilder::generateDTOFromEntity)
                 .collect(Collectors.toList());
     }
+
+    public Long findUserIdByEmail(String email) throws UserException {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        if (user.isEmpty()) {
+            throw new UserException("User not found with email field: " + email);
+        }
+        return user.get().getId();
+    }
+
+    public boolean userExists(Long userId) {
+        return userRepository.existsById(userId);
+    }
 }

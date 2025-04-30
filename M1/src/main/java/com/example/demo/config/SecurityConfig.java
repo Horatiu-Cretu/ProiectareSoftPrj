@@ -28,26 +28,33 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        return http.csrf(customizer -> customizer.disable()).
-                authorizeHttpRequests(request -> request
+        return http
+                .csrf(customizer -> customizer.disable())
+                .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/user/login", "/api/user/register").permitAll()
-                        .requestMatchers("/api/friends/send-request").permitAll()
-                        .requestMatchers("/api/friends/accept-request").permitAll()
-                        .requestMatchers("/api/friends/reject-request").permitAll()
-                        .anyRequest().authenticated()).
-                httpBasic(Customizer.withDefaults()).
-                sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
-
-
+                        .requestMatchers("/api/friends/send/**").permitAll()
+                        .requestMatchers("/api/friends/accept/**").permitAll()
+                        .requestMatchers("/api/friends/reject/**").permitAll()
+                        .requestMatchers("/api/posts/**").authenticated()        // changed to authenticated
+                        .requestMatchers("/api/comments/**").authenticated()     // changed to authenticated
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // Add JWT filter
+                .build();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setPasswordEncoder(new BCryptPasswordEncoder(12));
+        authProvider.setPasswordEncoder(passwordEncoder());
         authProvider.setUserDetailsService(userDetailsService);
         return authProvider;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
     }
 
     @Bean

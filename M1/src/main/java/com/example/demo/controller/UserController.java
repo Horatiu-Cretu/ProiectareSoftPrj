@@ -3,6 +3,7 @@ package com.example.demo.controller;
 
 import com.example.demo.builder.userbuilder.UserBuilder;
 import com.example.demo.builder.userbuilder.UserViewBuilder;
+import com.example.demo.dto.authdto.AuthResponse;
 import com.example.demo.dto.userdto.UserDTO;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
@@ -67,18 +68,10 @@ public class UserController {
                 .body("User registered successfully");
     }
 
-    @Transactional
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
-        // Convert DTO to User entity for authentication
-        Role role = roleRepository.findByName("USER");
-        User user = UserBuilder.generateEntityFromDTO(userDTO, role);
-
-        // Authenticate and generate token
-        String token = userService.login(user);
-
-        // Return token upon successful login
-        return ResponseEntity.ok(token);
+    public ResponseEntity<AuthResponse> login(@RequestBody User user) {
+        AuthResponse response = userService.login(user);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/logout")
@@ -94,10 +87,6 @@ public class UserController {
 
         return ResponseEntity.ok("Logged out successfully");
     }
-
-
-
-
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseEntity<?> displayAllUserView(){
