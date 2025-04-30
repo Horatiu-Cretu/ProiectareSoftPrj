@@ -1,0 +1,6 @@
+{
+  "timeStamp": "04-05-2025 08:19:25",
+  "httpStatusCode": 400,
+  "reason": "BAD REQUEST",
+  "message": "Invalid email format; Role name must be uppercase (e.g., 'USER', 'ADMIN')"
+}
