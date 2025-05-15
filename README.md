@@ -5,28 +5,20 @@ This tutorial guides you through testing the application's core features using P
 ## Prerequisites
 
 * **Postman:** Ensure Postman is installed.
-* **Services Running:** Both M1 (port 8081) and M2 (port 8082) should be running.
+* **Services Running:** M1 (port 8081), M2 (port 8082), M3 (port 8083) should be running.
 * **Database:** Your MySQL database should be running and accessible.
 
 ## Setup (Postman Environment Recommended)
 
-Create a Postman Environment (e.g., "Social App Env") with these variables:
 
-* `baseURL`: `http://localhost:8081`
-* `authToken`: (Leave empty, fill after login)
-* `userId1`: (Fill after registering/logging in User 1)
-* `userId2`: (Fill after registering/logging in User 2)
-* `postId`: (Fill after creating a post)
-* `commentId`: (Fill after creating a comment)
-* `friendRequestId`: (Fill after sending a friend request)
 
-## 2. Postman Testing Guide
+## 1. Postman Testing Guide
 
 ### Authentication & User Setup
 
 1.  **Register User 1**
     * Method: `POST`
-    * URL: `{{baseURL}}/api/user/register`
+    * URL: `http://localhost:8081/api/user/register`
     * Headers: `Content-Type: application/json`
     * Body (raw JSON):
         ```json
@@ -41,7 +33,7 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
 
 2.  **Register User 2**
     * Method: `POST`
-    * URL: `{{baseURL}}/api/user/register`
+    * URL: `http://localhost:8081/api/user/register`
     * Headers: `Content-Type: application/json`
     * Body (raw JSON):
         ```json
@@ -56,7 +48,7 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
 
 3.  **Login (User 1 - Alice)**
     * Method: `POST`
-    * URL: `{{baseURL}}/api/user/login`
+    * URL: `http://localhost:8081/api/user/login`
     * Headers: `Content-Type: application/json`
     * Body (raw JSON):
         ```json
@@ -72,9 +64,10 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
 
 * **Note:** For all authenticated requests below, set Authorization: Bearer Token `{{authToken}}`.
 
-4.  **Create Post**
+
+4. **Create Post**
     * Method: `POST`
-    * URL: `{{baseURL}}/api/posts`
+    * URL: `http://localhost:8081/api/posts`
     * Authorization: Bearer Token `{{authToken}}`
     * Body: `form-data`
         * `content` (Text): `My first post! #awesome`
@@ -84,33 +77,26 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
     * *Response: 201 Created. Note the `id` of the new post.*
     * **Action:** Save the post `id` to `{{postId}}`.
 
-5.  **Get All Posts** (Auth Optional)
+5. **Get All Posts** (Auth Optional)
     * Method: `GET`
-    * URL: `{{baseURL}}/api/posts`
+    * URL: `http://localhost:8081/api/posts`
     * Authorization: (Optional) Bearer Token `{{authToken}}`
     * *Response: 200 OK with a list of posts.*
 
-6.  **Get Posts by User** (Auth Optional)
+6. **Get Posts by User** (Auth Optional)
     * Method: `GET`
-    * URL: `{{baseURL}}/api/posts/user/{{userId1}}` (Replace `userId1` with desired user ID)
+    * URL: `http://localhost:8081/api/posts/user/{{userId1}}` (Replace `userId1` with desired user ID)
     * Authorization: (Optional) Bearer Token `{{authToken}}`
     * *Response: 200 OK with posts by the specified user.*
 
-7.  **Get Posts by Hashtag** (Auth Optional)
+7. **Get Posts by Hashtag** (Auth Optional)
     * Method: `GET`
-    * URL: `{{baseURL}}/api/posts/hashtag/%23awesome` (URL Encode `#` as `%23`)
+    * URL: `http://localhost:8081/api/posts/hashtag/java (if you want to see the posts with #java hashtag)`
     * Authorization: (Optional) Bearer Token `{{authToken}}`
     * *Response: 200 OK with posts containing the hashtag.*
-
-8.  **Search Posts** (Auth Optional)
-    * Method: `GET`
-    * URL: `{{baseURL}}/api/posts/search?query=first` (Replace 'first' with search term)
-    * Authorization: (Optional) Bearer Token `{{authToken}}`
-    * *Response: 200 OK with posts matching the query in their content.*
-
-9.  **Update Post**
+8. **Update Post**
     * Method: `PUT`
-    * URL: `{{baseURL}}/api/posts/{{postId}}`
+    * URL: `http://localhost:8081/api/posts/{{postId}}`
     * Authorization: Bearer Token `{{authToken}}`
     * Body: `form-data` (Include fields to update, e.g., `content`, `hashtags`, `image`)
         * `content`: `My updated post content. #updated`
@@ -118,19 +104,13 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
         * `hashtags`: `#updated`
     * *Response: 200 OK with the updated post details.*
 
-10. **Delete Post**
-    * Method: `DELETE`
-    * URL: `{{baseURL}}/api/posts/{{postId}}`
-    * Authorization: Bearer Token `{{authToken}}`
-    * *Response: 204 No Content.*
-
+    
 ### Comments (Requires Authentication for Create/Update/Delete)
 
 * **Note:** For all authenticated requests below, set Authorization: Bearer Token `{{authToken}}`.
-
-11. **Create Comment**
+9. **Create Comment**
     * Method: `POST`
-    * URL: `{{baseURL}}/api/comments/post/{{postId}}` (Use ID of an existing post)
+    * URL: `http://localhost:8081/api/comments/post/{{postId}}` (Use ID of an existing post)
     * Authorization: Bearer Token `{{authToken}}`
     * Headers: `Content-Type: application/json`
     * Body (raw JSON):
@@ -142,107 +122,100 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
     * *Response: 201 Created. Note the `id` of the new comment.*
     * **Action:** Save the comment `id` to `{{commentId}}`.
 
-12. **Get Comments for Post** (Auth Optional)
+10. **Get Comments for Post** (Auth Optional)
     * Method: `GET`
-    * URL: `{{baseURL}}/api/comments/post/{{postId}}`
+    * URL: `http://localhost:8081/api/comments/post/{{postId}}`
     * Authorization: (Optional) Bearer Token `{{authToken}}`
     * *Response: 200 OK with a list of comments for the post.*
 
-13. **Update Comment**
-    * Method: `PUT`
-    * URL: `{{baseURL}}/api/comments/{{commentId}}`
-    * Authorization: Bearer Token `{{authToken}}`
-    * Headers: `Content-Type: application/json`
-    * Body (raw JSON):
-        ```json
-        {
-            "content": "Updated comment text."
-        }
-        ```
-    * *Response: 200 OK with updated comment details.*
-
-14. **Delete Comment**
-    * Method: `DELETE`
-    * URL: `{{baseURL}}/api/comments/{{commentId}}`
-    * Authorization: Bearer Token `{{authToken}}`
-    * *Response: 204 No Content.*
 
 ### Friend Requests (Requires Authentication)
 
 * **Note:** For all authenticated requests below, set Authorization: Bearer Token `{{authToken}}`. You may need to log in as the appropriate user (sender or receiver) and update `{{authToken}}`.
 
-15. **Send Friend Request** (e.g., Alice sends to Bob)
+11. **Send Friend Request** (e.g., Alice sends to Bob)
     * Method: `POST`
     * URL: `{{baseURL}}/api/friends/send/{{userId2}}` (Use receiver's ID)
     * Authorization: Bearer Token `{{authToken}}` (Sender's token)
     * *Response: 200 OK. If the request ID is returned, note it.*
     * **Action:** Assume request ID is `1` for example, save to `{{friendRequestId}}`.
 
-16. **Accept Friend Request** (e.g., Bob accepts from Alice)
+12. **Accept Friend Request** (e.g., Bob accepts from Alice)
     * **Action:** Login as Bob, update `{{authToken}}` with Bob's token.
     * Method: `POST`
     * URL: `{{baseURL}}/api/friends/accept/{{friendRequestId}}` (Use the ID of the request)
     * Authorization: Bearer Token `{{authToken}}` (Receiver's token)
     * *Response: 200 OK.*
 
-17. **Reject Friend Request** (Alternative to Accept)
+13. **Reject Friend Request** (Alternative to Accept)
     * **Action:** Login as Bob, update `{{authToken}}` with Bob's token.
     * Method: `POST`
     * URL: `{{baseURL}}/api/friends/reject/{{friendRequestId}}` (Use the ID of the request)
     * Authorization: Bearer Token `{{authToken}}` (Receiver's token)
     * *Response: 200 OK.*
 
-18. **View Pending Requests** (e.g., Bob views requests sent to him)
+14. **View Pending Requests** (e.g., Bob views requests sent to him)
     * **Action:** Ensure logged in as the user whose pending requests you want to see (e.g., Bob), update `{{authToken}}`.
     * Method: `GET`
     * URL: `{{baseURL}}/api/friends/pending`
     * Authorization: Bearer Token `{{authToken}}`
     * *Response: 200 OK with a list of pending requests where the current user is the receiver.*
 
-### User Management (Requires Authentication - Be Cautious with Update/Delete)
+### User Management (Requires Admin Authentication - Be Cautious with Update/Delete)
 
-* **Note:** Most of these likely require ADMIN role in a real app, but based on M1's current SecurityConfig, they might be accessible with USER role + valid token.
-
-19. **Get All Users**
-    * Method: `GET`
-    * URL: `{{baseURL}}/api/user/getAll`
-    * Authorization: Bearer Token `{{authToken}}`
-    * *Response: 200 OK with list of all users.*
-
-20. **Get User by ID**
-    * Method: `GET`
-    * URL: `{{baseURL}}/api/user/getUserById/{{userId1}}`
-    * Authorization: Bearer Token `{{authToken}}`
-    * *Response: 200 OK with user details.*
-
-21. **Get User by Email**
-    * Method: `GET`
-    * URL: `{{baseURL}}/api/user/getUserByEmail/alice@example.com`
-    * Authorization: Bearer Token `{{authToken}}`
-    * *Response: 200 OK with user details.*
-
-22. **Update User** (Requires User ID in body)
-    * Method: `PUT`
-    * URL: `{{baseURL}}/api/user/update`
-    * Authorization: Bearer Token `{{authToken}}`
+15. **Register Admin User**
+    * Method: `POST`
+    * URL: `http://localhost:8081/api/user/register`
     * Headers: `Content-Type: application/json`
     * Body (raw JSON):
         ```json
         {
-            "id": 1, 
-            "name": "Alice Updated",
-            "email": "alice_updated@example.com",
-            "password": "newpassword123", 
-            "roleName": "USER" 
+        "name": "Admin_user3",
+        "email": "admin3@admin.com",
+        "password": "adminpassword",
+        "roleName": "ADMIN"
         }
         ```
-    * *Response: 200 OK with the updated user's ID.*
+    * *Response: 201 Created.*
 
-23. **Delete User**
+16. **Login as Admin**
+    * Method: `POST`
+    * URL: `http://localhost:8081/api/user/login`
+    * Headers: `Content-Type: application/json`
+    * Body (raw JSON):
+        ```json
+      {
+      "email": "admin3@admin.com",
+      "password": "adminpassword"
+      }
+        ```
+      * *Response: 200 OK. Note the `token` and `userId`.*
+
+17. **Block User**
+    * Method: `POST`
+    * URL: `http://localhost:8081/api/user/block/{{userId}}` (Use the ID of the user to block)
+    * Authorization: Bearer Token `{{authToken}}` (Admin's token)
+    * *Response: 200 OK.*
+
+18. **Unblock User**
+    * Method: `POST`
+    * URL: `http://localhost:8081/api/user/unblock/{{userId}}` (Use the ID of the user to unblock)
+    * Authorization: Bearer Token `{{authToken}}` (Admin's token)
+    * *Response: 200 OK.*
+
+19. **Delete a User**
     * Method: `DELETE`
-    * URL: `{{baseURL}}/api/user/{{userId1}}` (Use ID of user to delete)
-    * Authorization: Bearer Token `{{authToken}}`
-    * *Response: 200 OK (or potentially 204 No Content).*
+    * URL: `http://localhost:8081/api/user/{{userId}}` (Use the ID of the user to delete)
+    * Authorization: Bearer Token `{{authToken}}` (Admin's token)
+    * *Response: 200 OK.*
+    * *Note:** Be cautious with this action as it permanently deletes the user and their data.
+20. **Delete a Comment**
+    * Method: `DELETE`
+    * URL: `http://localhost:8081/api/comments/{{commentId}}` (Use the ID of the comment to delete)
+    * Authorization: Bearer Token `{{authToken}}` (User's token)
+    * *Response: 200 OK.*
+    * *Note:** Be cautious with this action as it permanently deletes the comment.
+
 
 ### Testing Workflow Summary
 
@@ -259,7 +232,9 @@ Create a Postman Environment (e.g., "Social App Env") with these variables:
 11. Login back as Alice (update `{{authToken}}`).
 12. (As Alice) Delete the Comment using `{{commentId}}`.
 13. (As Alice) Delete the Post using `{{postId}}`.
-14. Test User Management endpoints if needed (requires valid token).
+14. (As Admin) Register an Admin user, login, and test blocking/unblocking users.
+15. (As Admin) Delete a user using their ID.
+16. (As Admin) Delete a comment using its ID.
 
 *Remember to replace placeholders like `{postId}`, `{commentId}`, `{userId1}`, `{userId2}`, `{friendRequestId}` and `YOUR_JWT_TOKEN` (via `{{authToken}}`) with actual values during testing.*
 

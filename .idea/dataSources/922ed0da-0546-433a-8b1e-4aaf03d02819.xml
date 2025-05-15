@@ -2,6 +2,7 @@
 <dataSource name="my_new_db@localhost">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.53">
     <root id="1">
+      <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <ServerVersion>10.4.32</ServerVersion>
     </root>
@@ -1021,8 +1022,10 @@
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <schema id="327" parent="1" name="my_new_db">
+      <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-04-05.10:23:31</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLevel>3</LastIntrospectionLevel>
+      <LastIntrospectionLocalTimestamp>2025-05-10.21:20:55</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <schema id="328" parent="1" name="mysql">
@@ -1043,267 +1046,421 @@
     <schema id="333" parent="1" name="ticket_store">
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
-    <user id="334" parent="1" name="pma">
+    <schema id="334" parent="1" name="my_new_db_m3">
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </schema>
+    <user id="335" parent="1" name="pma">
       <Host>localhost</Host>
-    </user>
-    <user id="335" parent="1" name="root">
-      <Host>127.0.0.1</Host>
     </user>
     <user id="336" parent="1" name="root">
-      <Host>::1</Host>
+      <Host>127.0.0.1</Host>
     </user>
     <user id="337" parent="1" name="root">
+      <Host>::1</Host>
+    </user>
+    <user id="338" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="338" parent="327" name="friend_requests">
+    <table id="339" parent="327" name="comments">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="339" parent="327" name="hashtags">
+    <table id="340" parent="327" name="friend_requests">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="340" parent="327" name="post_hashtags">
+    <table id="341" parent="327" name="hashtags">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="341" parent="327" name="posts">
+    <table id="342" parent="327" name="post_hashtags">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="342" parent="327" name="role">
+    <table id="343" parent="327" name="posts">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <table id="343" parent="327" name="users">
+    <table id="344" parent="327" name="reactions">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_general_ci</CollationName>
     </table>
-    <column id="344" parent="338" name="id">
-      <AutoIncrement>12</AutoIncrement>
+    <table id="345" parent="327" name="role">
+      <DetailsLevel>3</DetailsLevel>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </table>
+    <table id="346" parent="327" name="users">
+      <DetailsLevel>3</DetailsLevel>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_general_ci</CollationName>
+    </table>
+    <column id="347" parent="339" name="id">
+      <AutoIncrement>5</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint(20)|0s</StoredType>
     </column>
-    <column id="345" parent="338" name="created_at">
-      <Position>2</Position>
-      <StoredType>datetime(6)|0s</StoredType>
-    </column>
-    <column id="346" parent="338" name="receiver_id">
-      <Position>3</Position>
-      <StoredType>bigint(20)|0s</StoredType>
-    </column>
-    <column id="347" parent="338" name="sender_id">
-      <Position>4</Position>
-      <StoredType>bigint(20)|0s</StoredType>
-    </column>
-    <column id="348" parent="338" name="status">
-      <Position>5</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <index id="349" parent="338" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="350" parent="338" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="351" parent="339" name="id">
-      <AutoIncrement>4</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>bigint(20)|0s</StoredType>
-    </column>
-    <column id="352" parent="339" name="name">
+    <column id="348" parent="339" name="content">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(255)|0s</StoredType>
     </column>
-    <index id="353" parent="339" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="354" parent="339" name="UK_oed8qhhrhflqj7olh3oeii6ym">
-      <ColNames>name</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="355" parent="339" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <key id="356" parent="339" name="UK_oed8qhhrhflqj7olh3oeii6ym">
-      <UnderlyingIndexName>UK_oed8qhhrhflqj7olh3oeii6ym</UnderlyingIndexName>
-    </key>
-    <column id="357" parent="340" name="post_id">
+    <column id="349" parent="339" name="created_at">
       <NotNull>1</NotNull>
-      <Position>1</Position>
+      <Position>3</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="350" parent="339" name="image">
+      <Position>4</Position>
+      <StoredType>mediumblob|0s</StoredType>
+    </column>
+    <column id="351" parent="339" name="updated_at">
+      <Position>5</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="352" parent="339" name="post_id">
+      <NotNull>1</NotNull>
+      <Position>6</Position>
       <StoredType>bigint(20)|0s</StoredType>
     </column>
-    <column id="358" parent="340" name="hashtag_id">
+    <column id="353" parent="339" name="user_id">
       <NotNull>1</NotNull>
-      <Position>2</Position>
+      <Position>7</Position>
       <StoredType>bigint(20)|0s</StoredType>
     </column>
-    <foreign-key id="359" parent="340" name="FKrrlq793bvaswhomm900i71ac5">
+    <column id="354" parent="339" name="reaction_count">
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <foreign-key id="355" parent="339" name="FKh4c7lvsc298whoyd4w9ta25cr">
       <ColNames>post_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>posts</RefTableName>
     </foreign-key>
-    <foreign-key id="360" parent="340" name="FKb8j4xx456a7584d8blc604pqg">
-      <ColNames>hashtag_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>hashtags</RefTableName>
-    </foreign-key>
-    <index id="361" parent="340" name="PRIMARY">
-      <ColNames>post_id
-hashtag_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="362" parent="340" name="FKb8j4xx456a7584d8blc604pqg">
-      <ColNames>hashtag_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="363" parent="340" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="364" parent="341" name="id">
-      <AutoIncrement>3</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>bigint(20)|0s</StoredType>
-    </column>
-    <column id="365" parent="341" name="content">
-      <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="366" parent="341" name="created_at">
-      <Position>3</Position>
-      <StoredType>datetime(6)|0s</StoredType>
-    </column>
-    <column id="367" parent="341" name="image">
-      <Position>4</Position>
-      <StoredType>tinyblob|0s</StoredType>
-    </column>
-    <column id="368" parent="341" name="post_type">
-      <Position>5</Position>
-      <StoredType>enum(&apos;IMAGE&apos;, &apos;TEXT&apos;, &apos;TEXT_WITH_IMAGE&apos;)|0e</StoredType>
-    </column>
-    <column id="369" parent="341" name="user_id">
-      <Position>6</Position>
-      <StoredType>bigint(20)|0s</StoredType>
-    </column>
-    <foreign-key id="370" parent="341" name="FK5lidm6cqbc7u4xhqpxm898qme">
+    <foreign-key id="356" parent="339" name="FK8omq0tc18jd43bu5tjh6jvraq">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <index id="371" parent="341" name="PRIMARY">
+    <index id="357" parent="339" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="372" parent="341" name="FK5lidm6cqbc7u4xhqpxm898qme">
+    <index id="358" parent="339" name="FKh4c7lvsc298whoyd4w9ta25cr">
+      <ColNames>post_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="359" parent="339" name="FK8omq0tc18jd43bu5tjh6jvraq">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="373" parent="341" name="PRIMARY">
+    <key id="360" parent="339" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="374" parent="342" name="id">
+    <column id="361" parent="340" name="id">
+      <AutoIncrement>17</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="362" parent="340" name="created_at">
+      <Position>2</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="363" parent="340" name="receiver_id">
+      <Position>3</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="364" parent="340" name="sender_id">
+      <Position>4</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="365" parent="340" name="status">
+      <Position>5</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <index id="366" parent="340" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="367" parent="340" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="368" parent="341" name="id">
       <AutoIncrement>6</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint(20)|0s</StoredType>
     </column>
-    <column id="375" parent="342" name="name">
+    <column id="369" parent="341" name="name">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <index id="376" parent="342" name="PRIMARY">
+    <index id="370" parent="341" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="377" parent="342" name="UK_8sewwnpamngi6b1dwaa88askk">
+    <index id="371" parent="341" name="UK_oed8qhhrhflqj7olh3oeii6ym">
       <ColNames>name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="378" parent="342" name="PRIMARY">
+    <key id="372" parent="341" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="379" parent="342" name="UK_8sewwnpamngi6b1dwaa88askk">
-      <UnderlyingIndexName>UK_8sewwnpamngi6b1dwaa88askk</UnderlyingIndexName>
+    <key id="373" parent="341" name="UK_oed8qhhrhflqj7olh3oeii6ym">
+      <UnderlyingIndexName>UK_oed8qhhrhflqj7olh3oeii6ym</UnderlyingIndexName>
     </key>
-    <column id="380" parent="343" name="id">
-      <AutoIncrement>52</AutoIncrement>
+    <column id="374" parent="342" name="post_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint(20)|0s</StoredType>
     </column>
-    <column id="381" parent="343" name="email">
+    <column id="375" parent="342" name="hashtag_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="382" parent="343" name="name">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>varchar(100)|0s</StoredType>
-    </column>
-    <column id="383" parent="343" name="password">
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StoredType>varchar(255)|0s</StoredType>
-    </column>
-    <column id="384" parent="343" name="time_stamp">
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-      <StoredType>datetime(6)|0s</StoredType>
-    </column>
-    <column id="385" parent="343" name="role_id">
-      <Position>6</Position>
       <StoredType>bigint(20)|0s</StoredType>
     </column>
-    <foreign-key id="386" parent="343" name="FK4qu1gr772nnf6ve5af002rwya">
-      <ColNames>role_id</ColNames>
+    <foreign-key id="376" parent="342" name="FKrrlq793bvaswhomm900i71ac5">
+      <ColNames>post_id</ColNames>
       <RefColNames>id</RefColNames>
-      <RefTableName>role</RefTableName>
+      <RefTableName>posts</RefTableName>
     </foreign-key>
-    <index id="387" parent="343" name="PRIMARY">
-      <ColNames>id</ColNames>
+    <foreign-key id="377" parent="342" name="FKb8j4xx456a7584d8blc604pqg">
+      <ColNames>hashtag_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>hashtags</RefTableName>
+    </foreign-key>
+    <index id="378" parent="342" name="PRIMARY">
+      <ColNames>post_id
+hashtag_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="388" parent="343" name="UK_6dotkott2kjsp8vw4d0m25fb7">
-      <ColNames>email</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="389" parent="343" name="FK4qu1gr772nnf6ve5af002rwya">
-      <ColNames>role_id</ColNames>
+    <index id="379" parent="342" name="FKb8j4xx456a7584d8blc604pqg">
+      <ColNames>hashtag_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="390" parent="343" name="PRIMARY">
+    <key id="380" parent="342" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="391" parent="343" name="UK_6dotkott2kjsp8vw4d0m25fb7">
+    <column id="381" parent="343" name="id">
+      <AutoIncrement>12</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="382" parent="343" name="content">
+      <Position>2</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="383" parent="343" name="created_at">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="384" parent="343" name="image">
+      <Position>4</Position>
+      <StoredType>longblob|0s</StoredType>
+    </column>
+    <column id="385" parent="343" name="post_type">
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StoredType>enum(&apos;IMAGE&apos;, &apos;TEXT&apos;, &apos;TEXT_WITH_IMAGE&apos;)|0e</StoredType>
+    </column>
+    <column id="386" parent="343" name="user_id">
+      <Position>6</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="387" parent="343" name="updated_at">
+      <Position>7</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="388" parent="343" name="reaction_count">
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <foreign-key id="389" parent="343" name="FK5lidm6cqbc7u4xhqpxm898qme">
+      <ColNames>user_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>users</RefTableName>
+    </foreign-key>
+    <index id="390" parent="343" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="391" parent="343" name="FK5lidm6cqbc7u4xhqpxm898qme">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="392" parent="343" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="393" parent="344" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="394" parent="344" name="created_at">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="395" parent="344" name="reaction_type">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>enum(&apos;HAHA&apos;, &apos;LIKE&apos;, &apos;LOVE&apos;, &apos;SAD&apos;)|0e</StoredType>
+    </column>
+    <column id="396" parent="344" name="target_id">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="397" parent="344" name="target_type">
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StoredType>enum(&apos;COMMENT&apos;, &apos;POST&apos;)|0e</StoredType>
+    </column>
+    <column id="398" parent="344" name="updated_at">
+      <Position>6</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="399" parent="344" name="user_id">
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <index id="400" parent="344" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="401" parent="344" name="UKt0s38bf3bmj9nves8tis23ko0">
+      <ColNames>user_id
+target_id
+target_type</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="402" parent="344" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="403" parent="344" name="UKt0s38bf3bmj9nves8tis23ko0">
+      <UnderlyingIndexName>UKt0s38bf3bmj9nves8tis23ko0</UnderlyingIndexName>
+    </key>
+    <column id="404" parent="345" name="id">
+      <AutoIncrement>7</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="405" parent="345" name="name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <index id="406" parent="345" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="407" parent="345" name="UK_8sewwnpamngi6b1dwaa88askk">
+      <ColNames>name</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="408" parent="345" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="409" parent="345" name="UK_8sewwnpamngi6b1dwaa88askk">
+      <UnderlyingIndexName>UK_8sewwnpamngi6b1dwaa88askk</UnderlyingIndexName>
+    </key>
+    <column id="410" parent="346" name="id">
+      <AutoIncrement>66</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <column id="411" parent="346" name="email">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="412" parent="346" name="name">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>varchar(100)|0s</StoredType>
+    </column>
+    <column id="413" parent="346" name="password">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="414" parent="346" name="time_stamp">
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StoredType>datetime(6)|0s</StoredType>
+    </column>
+    <column id="415" parent="346" name="role_id">
+      <Position>6</Position>
+      <StoredType>bigint(20)|0s</StoredType>
+    </column>
+    <foreign-key id="416" parent="346" name="FK4qu1gr772nnf6ve5af002rwya">
+      <ColNames>role_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>role</RefTableName>
+    </foreign-key>
+    <index id="417" parent="346" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="418" parent="346" name="UK_6dotkott2kjsp8vw4d0m25fb7">
+      <ColNames>email</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="419" parent="346" name="FK4qu1gr772nnf6ve5af002rwya">
+      <ColNames>role_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="420" parent="346" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="421" parent="346" name="UK_6dotkott2kjsp8vw4d0m25fb7">
       <UnderlyingIndexName>UK_6dotkott2kjsp8vw4d0m25fb7</UnderlyingIndexName>
     </key>
   </database-model>

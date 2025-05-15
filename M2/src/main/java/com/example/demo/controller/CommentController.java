@@ -1,150 +1,158 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ReactionCountUpdateDTO;
 import com.example.demo.dto.commentdto.CommentDTO;
 import com.example.demo.dto.commentdto.CommentViewDTO;
 import com.example.demo.errorhandler.UserException;
 import com.example.demo.service.CommentService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid; // For DTO validation
-import org.slf4j.Logger; // Add Logging
-import org.slf4j.LoggerFactory; // Add Logging
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated; // For param/path validation
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List; // Import List
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api/m2/comments")
 @Validated
-public class CommentController extends BaseController { // Inherit getCurrentUserId
+public class CommentController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(CommentController.class);
     private final CommentService commentService;
 
     public CommentController(CommentService commentService) {
-        super(); // Call BaseController constructor
+        super();
         this.commentService = commentService;
     }
 
-    // --- Create Comment ---
+    private ResponseEntity<?> handleUserException(UserException e, String action) {
+        log.error("Error {}: {}", action, e.getMessage());
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String lowerCaseMsg = e.getMessage().toLowerCase();
+        if (lowerCaseMsg.contains("not found")) {
+            status = HttpStatus.NOT_FOUND;
+        } else if (lowerCaseMsg.contains("not authorized") || lowerCaseMsg.contains("unauthorized")) {
+            status = HttpStatus.FORBIDDEN;
+        }
+        return ResponseEntity.status(status).body(e.getMessage());
+    }
+
     @PostMapping("/post/{postId}")
     public ResponseEntity<?> createComment(
             @PathVariable Long postId,
-            @Valid @RequestBody CommentDTO commentDTO, // Validate DTO
+            @Valid @RequestBody CommentDTO commentDTO,
             HttpServletRequest request) {
         try {
             Long userId = getCurrentUserId(request);
-            log.info("Received request from user {} to create comment on post {}", userId, postId);
             CommentViewDTO createdComment = commentService.createComment(postId, commentDTO, userId);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
         } catch (UserException e) {
-            log.warn("UserException during comment creation on post {}: {}", postId, e.getMessage());
-            HttpStatus status = HttpStatus.BAD_REQUEST; // Default
-            String lowerCaseMsg = e.getMessage().toLowerCase();
-            if (lowerCaseMsg.contains("post not found")) {
-                status = HttpStatus.NOT_FOUND;
-            } else if (lowerCaseMsg.contains("user not found")) {
-                status = HttpStatus.UNAUTHORIZED; // Or NOT_FOUND depending on context
-            } else if (lowerCaseMsg.contains("authorized")) {
-                status = HttpStatus.UNAUTHORIZED;
-            }
-            return ResponseEntity.status(status).body(e.getMessage());
+            return handleUserException(e, "creating comment for post " + postId + " by user " + request.getAttribute("userId"));
         } catch (Exception e) {
-            log.error("Unexpected error creating comment on post {}: {}", postId, e.getMessage(), e);
+            log.error("Unexpected error creating comment for post {} by user {}: {}", postId, request.getAttribute("userId"), e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating comment: " + e.getMessage());
         }
     }
 
-    // --- Update Comment (Optional - if needed) ---
     @PutMapping("/{commentId}")
     public ResponseEntity<?> updateComment(
             @PathVariable Long commentId,
-            @Valid @RequestBody CommentDTO commentDTO, // Validate DTO
+            @Valid @RequestBody CommentDTO commentDTO,
             HttpServletRequest request) {
         try {
             Long userId = getCurrentUserId(request);
-            log.info("Received request from user {} to update comment {}", userId, commentId);
             CommentViewDTO updatedComment = commentService.updateComment(commentId, commentDTO, userId);
             return ResponseEntity.ok(updatedComment);
         } catch (UserException e) {
-            log.warn("UserException during comment update for comment {}: {}", commentId, e.getMessage());
-            HttpStatus status = HttpStatus.BAD_REQUEST; // Default
-            String lowerCaseMsg = e.getMessage().toLowerCase();
-            if (lowerCaseMsg.contains("not found")) {
-                status = HttpStatus.NOT_FOUND;
-            } else if (lowerCaseMsg.contains("not authorized")) {
-                status = HttpStatus.FORBIDDEN; // Use 403 Forbidden
-            }
-            return ResponseEntity.status(status).body(e.getMessage());
+            return handleUserException(e, "updating comment " + commentId + " by user " + request.getAttribute("userId"));
         } catch (Exception e) {
-            log.error("Unexpected error updating comment {}: {}", commentId, e.getMessage(), e);
+            log.error("Unexpected error updating comment {} by user {}: {}", commentId, request.getAttribute("userId"), e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating comment: " + e.getMessage());
         }
     }
 
-
-    // --- Delete Comment ---
     @DeleteMapping("/{commentId}")
     public ResponseEntity<?> deleteComment(
             @PathVariable Long commentId,
             HttpServletRequest request) {
         try {
             Long userId = getCurrentUserId(request);
-            log.info("Received request from user {} to delete comment {}", userId, commentId);
             commentService.deleteComment(commentId, userId);
-            return ResponseEntity.noContent().build(); // 204 No Content
+            return ResponseEntity.noContent().build();
         } catch (UserException e) {
-            log.warn("UserException during comment deletion for comment {}: {}", commentId, e.getMessage());
-            HttpStatus status = HttpStatus.BAD_REQUEST; // Default
-            String lowerCaseMsg = e.getMessage().toLowerCase();
-            if (lowerCaseMsg.contains("not found")) {
-                status = HttpStatus.NOT_FOUND;
-            } else if (lowerCaseMsg.contains("not authorized")) {
-                status = HttpStatus.FORBIDDEN; // Use 403 Forbidden
-            }
-            return ResponseEntity.status(status).body(e.getMessage());
+            return handleUserException(e, "deleting comment " + commentId + " by user " + request.getAttribute("userId"));
         } catch (Exception e) {
-            log.error("Unexpected error deleting comment {}: {}", commentId, e.getMessage(), e);
+            log.error("Unexpected error deleting comment {} by user {}: {}", commentId, request.getAttribute("userId"), e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting comment: " + e.getMessage());
         }
     }
 
-    // --- Get Comments for Post (Public - using ViewDTO) ---
+    @DeleteMapping("/admin/comments/{commentId}")
+    public ResponseEntity<?> deleteCommentAsAdmin(
+            @PathVariable Long commentId,
+            HttpServletRequest request) {
+        try {
+            Long adminUserId = getCurrentUserId(request);
+            log.info("Admin {} attempting to delete comment {}", adminUserId, commentId);
+            commentService.deleteCommentAsAdmin(commentId, adminUserId);
+            return ResponseEntity.noContent().build();
+        } catch (UserException e) {
+            log.error("Admin {} error deleting comment {}: {}", request.getAttribute("userId"), commentId, e.getMessage());
+            return handleUserException(e, "admin deleting comment " + commentId);
+        } catch (Exception e) {
+            log.error("Unexpected admin error deleting comment {}: {}", commentId, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during admin deletion of comment: " + e.getMessage());
+        }
+    }
+
+
+    @PutMapping("/{commentId}/update-reaction-count")
+    public ResponseEntity<Void> updateCommentReactionCountInternal(
+            @PathVariable Long commentId,
+            @RequestBody ReactionCountUpdateDTO countDTO) {
+        try {
+            commentService.updateCommentReactionCount(commentId, countDTO.getReactionCount());
+            return ResponseEntity.ok().build();
+        } catch (UserException e) {
+            log.error("Failed to update reaction count for comment {}: {}", commentId, e.getMessage());
+            if (e.getMessage().toLowerCase().contains("not found")) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.badRequest().build();
+        } catch (Exception e) {
+            log.error("Unexpected error updating reaction count for comment {}: {}", commentId, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @GetMapping("/post/{postId}")
     public ResponseEntity<?> getCommentsByPost(
             @PathVariable Long postId) {
-        log.debug("Received request to get comments for post {}", postId);
         try {
-            // Assuming public access
             List<CommentViewDTO> comments = commentService.getCommentsByPost(postId);
             return ResponseEntity.ok(comments);
         } catch (UserException e) {
-            // Handle case where post doesn't exist
-            log.warn("UserException fetching comments for post {}: {}", postId, e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            log.error("Unexpected error fetching comments for post {}: {}", postId, e.getMessage(), e);
+            log.error("Error fetching comments for post {}: {}", postId, e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching comments: " + e.getMessage());
         }
     }
 
-    // --- Get Comments Formatted (Public - keeps original string format if needed) ---
-    // Consider removing this if getCommentsByPost (returning DTOs) is sufficient
     @GetMapping("/post/{postId}/formatted")
     public ResponseEntity<String> getFormattedCommentsByPost(
             @PathVariable Long postId) {
-        log.debug("Received request to get formatted comments for post {}", postId);
         try {
-            // Assuming public access
             String formattedComments = commentService.getFormattedCommentsByPost(postId);
             return ResponseEntity.ok(formattedComments);
         } catch (UserException e) {
-            log.warn("UserException fetching formatted comments for post {}: {}", postId, e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            log.error("Unexpected error fetching formatted comments for post {}: {}", postId, e.getMessage(), e);
+            log.error("Error fetching formatted comments for post {}: {}", postId, e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching formatted comments: " + e.getMessage());
         }
     }

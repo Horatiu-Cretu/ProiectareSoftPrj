@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-// --- Added Imports for 0.12.x ---
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import javax.crypto.SecretKey;
@@ -40,14 +39,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
     @Value("${jwt.secret}")
-    private String secretString; // Renamed for clarity
+    private String secretString;
 
-    // Cache the generated SecretKey to avoid recreating it on every request
     private volatile SecretKey key;
 
-    // Helper method to get or create the SecretKey instance (thread-safe lazy initialization)
     private SecretKey getKeyInstance() {
-        // Double-checked locking for efficiency
         if (this.key == null) {
             synchronized (this) {
                 if (this.key == null) {
@@ -75,14 +71,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response,
-            @NonNull FilterChain filterChain) // Use @NonNull for better practice
+            @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
         final String path = request.getRequestURI();
         final String method = request.getMethod();
         logger.info("M2 JwtAuthFilter - ENTERING filter for: {} {}", method, path);
 
-        // Skip filter if authentication already exists in context
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
             logger.trace("M2 JwtAuthFilter - Security context already populated, skipping JWT filter for: {} {}", method, path);
             filterChain.doFilter(request, response);
@@ -101,20 +96,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         logger.debug("M2 JwtAuthFilter - Extracted Token for {} {}: {}", method, path, jwt);
 
-        // Log the secret string (use cautiously in production)
         logger.debug("M2 JwtAuthFilter - Verifying token using secret string (length {}): '{}'",
                 (secretString != null ? secretString.length() : "null"),
                 (secretString != null ? secretString : "null"));
 
         try {
-            SecretKey verificationKey = getKeyInstance(); // Get the SecretKey
+            SecretKey verificationKey = getKeyInstance();
 
-            // *** Use 0.12.x verification style ***
             Claims claims = Jwts.parser()
-                    .verifyWith(verificationKey) // Use verifyWith(SecretKey)
+                    .verifyWith(verificationKey)
                     .build()
-                    .parseSignedClaims(jwt)      // Replaces parseClaimsJws
-                    .getPayload();               // Get claims
+                    .parseSignedClaims(jwt)
+                    .getPayload();
 
             String userIdSubject = claims.getSubject();
 
@@ -122,60 +115,50 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Long userId = Long.parseLong(userIdSubject);
                 logger.info("M2 JwtAuthFilter - Token validated for {} {}. User ID: {}", method, path, userId);
 
-                // Create Authentication token (principal is userId, no credentials needed for JWT)
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userId, // Principal is the User ID (Long)
-                        null,   // No credentials needed
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_AUTHENTICATED_USER")) // Example authority
+                        userId,
+                        null,
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_AUTHENTICATED_USER"))
                 );
 
-                // Set details (e.g., remote address)
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // Update SecurityContextHolder
                 SecurityContextHolder.getContext().setAuthentication(authToken);
                 logger.info("M2 JwtAuthFilter - SecurityContext updated for user ID {} for request {} {}", userId, method, path);
 
-                // Optionally, set userId as a request attribute for controllers
                 request.setAttribute("userId", userId);
                 logger.debug("M2 JwtAuthFilter - Set 'userId' request attribute to: {} for {} {}", userId, method, path);
 
             } else {
                 logger.warn("M2 JwtAuthFilter - JWT subject (userId) is null for {} {}.", method, path);
-                // Consider sending 401 if subject is mandatory
-                // response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                // response.getWriter().write("Unauthorized: Missing user identifier in token");
-                // return;
+
             }
 
         } catch (ExpiredJwtException e) {
             logger.warn("M2 JwtAuthFilter - JWT expired for {} {}: {}", method, path, e.getMessage());
-            SecurityContextHolder.clearContext(); // Clear context on failure
+            SecurityContextHolder.clearContext();
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.getWriter().write("Unauthorized: Token expired");
-            return; // Stop filter chain
+            return;
         } catch ( SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
-            // SignatureException is likely io.jsonwebtoken.security.SignatureException in 0.12.x
             logger.warn("M2 JwtAuthFilter - Invalid JWT ({}) for {} {}: {}", e.getClass().getSimpleName(), method, path, e.getMessage());
             SecurityContextHolder.clearContext();
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            // Provide specific message for signature failure
             if (e instanceof SignatureException) {
                 response.getWriter().write("Unauthorized: Invalid signature");
             } else {
                 response.getWriter().write("Unauthorized: Invalid token");
             }
-            return; // Stop filter chain
+            return;
         } catch (Exception e) {
-            // Catch unexpected errors during validation or context setting
             logger.error("M2 JwtAuthFilter - Unexpected error during JWT processing for {} {}: {}", method, path, e.getMessage(), e);
             SecurityContextHolder.clearContext();
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.getWriter().write("Internal Server Error during authentication processing");
-            return; // Stop filter chain
+            return;
         }
 
         logger.debug("M2 JwtAuthFilter - Proceeding with filter chain for: {} {}", method, path);
-        filterChain.doFilter(request, response); // Continue chain if token is valid or not present/required
+        filterChain.doFilter(request, response);
     }
 }

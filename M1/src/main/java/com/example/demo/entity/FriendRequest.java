@@ -16,7 +16,7 @@ public class FriendRequest {
     @Column(name = "receiver_id")
     private Long receiverId;
 
-    @Column(name = "status") // Store status as an integer (1 = PENDING, 2 = ACCEPTED, 3 = REJECTED)
+    @Column(name = "status")
     private Integer status;
 
     @Column(name = "created_at")
@@ -27,7 +27,7 @@ public class FriendRequest {
     public FriendRequest(Long senderId, Long receiverId) {
         this.senderId = senderId;
         this.receiverId = receiverId;
-        this.status = 1; // Default status: PENDING
+        this.status = 1;
         this.createdAt = LocalDateTime.now();
     }
 

@@ -1,11 +1,8 @@
-package com.example.demo.dto.postdto;
+package com.example.demo.dto.forwardingdto;
 
 import com.example.demo.entity.PostType;
-import jakarta.validation.constraints.NotNull; // Example validation if needed
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
-
-// Import List
 import java.util.List;
 
 
@@ -16,7 +13,6 @@ public class PostDTO {
 
     private MultipartFile image;
 
-    @NotNull(message = "Post type cannot be null")
     private PostType postType;
 
     private List<String> hashtags;

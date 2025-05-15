@@ -12,67 +12,68 @@ import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.validator.UserFieldValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.slf4j.Logger; // Import Logger
-import org.slf4j.LoggerFactory; // Import LoggerFactory
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class); // Add logger
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
     private final RoleRepository roleRepository;
-
-    // It's generally better to inject the encoder bean defined in SecurityConfig
-    // instead of creating a new instance here.
-    // private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
-
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JWTService jwtService;
+    private final AuthenticationManager authenticationManager;
+    private final JWTService jwtService;
 
     public List<UserViewDTO> findAllUserView() {
         return userRepository.findAll().stream()
-                .map(UserViewBuilder::generateDTOFromEntity)
+                .map(user -> {
+                    UserViewDTO dto = UserViewBuilder.generateDTOFromEntity(user);
+                    dto.setBlocked(user.isBlocked());
+                    dto.setBlockedReason(user.getBlockedReason());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
     public UserViewDTO findUserViewById(Long id) throws UserException {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            logger.warn("User not found with id: {}", id);
-            throw new UserException("User not found with id field: " + id);
-        }
-        return UserViewBuilder.generateDTOFromEntity(user.get());
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.warn("User not found with id: {}", id);
+                    return new UserException("User not found with id field: " + id);
+                });
+        UserViewDTO dto = UserViewBuilder.generateDTOFromEntity(user);
+        dto.setBlocked(user.isBlocked());
+        dto.setBlockedReason(user.getBlockedReason());
+        return dto;
     }
 
     public UserViewDTO findUserViewByEmail(String email) throws UserException {
-        Optional<User> user = userRepository.findUserByEmail(email);
-        if (user.isEmpty()) {
-            logger.warn("User not found with email: {}", email);
-            throw new UserException("User not found with email field: " + email);
-        }
-        return UserViewBuilder.generateDTOFromEntity(user.get());
+        User user = userRepository.findUserByEmail(email)
+                .orElseThrow(() -> {
+                    logger.warn("User not found with email: {}", email);
+                    return new UserException("User not found with email field: " + email);
+                });
+        UserViewDTO dto = UserViewBuilder.generateDTOFromEntity(user);
+        dto.setBlocked(user.isBlocked());
+        dto.setBlockedReason(user.getBlockedReason());
+        return dto;
     }
 
 
@@ -84,21 +85,21 @@ public class UserService {
             throw new UserException(errorMsg);
         }
 
-        Optional<Role> role = roleRepository.findRoleByName(userDTO.getRoleName().toUpperCase());
-        if (role.isEmpty()) {
-            logger.error("Role not found: {}", userDTO.getRoleName().toUpperCase());
-            throw new UserException("Role not found with name field: " + userDTO.getRoleName().toUpperCase());
-        }
+        Role role = roleRepository.findRoleByName(userDTO.getRoleName().toUpperCase())
+                .orElseThrow(() -> {
+                    logger.error("Role not found: {}", userDTO.getRoleName().toUpperCase());
+                    return new UserException("Role not found with name field: " + userDTO.getRoleName().toUpperCase());
+                });
 
-        Optional<User> user = userRepository.findUserByEmail(userDTO.getEmail());
-        if (user.isPresent()) {
+
+        if (userRepository.findUserByEmail(userDTO.getEmail()).isPresent()) {
             logger.warn("Attempted to create user with duplicate email: {}", userDTO.getEmail());
             throw new UserException("User record does not permit duplicates for email field: " + userDTO.getEmail());
         }
 
-        User userSave = UserBuilder.generateEntityFromDTO(userDTO, role.get());
-        // Ensure password is encoded if UserBuilder doesn't handle it
+        User userSave = UserBuilder.generateEntityFromDTO(userDTO, role);
         userSave.setPassword(bCryptPasswordEncoder.encode(userSave.getPassword()));
+        userSave.setTimeStamp(LocalDateTime.now());
 
         User savedUser = userRepository.save(userSave);
         logger.info("User created successfully with ID: {}", savedUser.getId());
@@ -113,111 +114,170 @@ public class UserService {
             throw new UserException(errorMsg);
         }
 
-        Optional<Role> role = roleRepository.findRoleByName(userDTO.getRoleName().toUpperCase());
-        if (role.isEmpty()) {
-            logger.error("Role not found: {}", userDTO.getRoleName().toUpperCase());
-            throw new UserException("Role not found with name field: " + userDTO.getRoleName().toUpperCase());
-        }
+        Role role = roleRepository.findRoleByName(userDTO.getRoleName().toUpperCase())
+                .orElseThrow(() -> {
+                    logger.error("Role not found: {}", userDTO.getRoleName().toUpperCase());
+                    return new UserException("Role not found with name field: " + userDTO.getRoleName().toUpperCase());
+                });
 
-        Optional<User> userOptional = userRepository.findById(userDTO.getId());
-        if (userOptional.isEmpty()) {
-            logger.error("User not found for update with ID: {}", userDTO.getId());
-            throw new UserException("User not found with id field: " + userDTO.getId());
-        }
-        User user = userOptional.get();
+        User user = userRepository.findById(userDTO.getId())
+                .orElseThrow(() -> {
+                    logger.error("User not found for update with ID: {}", userDTO.getId());
+                    return new UserException("User not found with id field: " + userDTO.getId());
+                });
 
-        // Check for email duplication only if the email is being changed
         if (!user.getEmail().equals(userDTO.getEmail())) {
-            Optional<User> verifyDuplicated = userRepository.findUserByEmail(userDTO.getEmail());
-            if (verifyDuplicated.isPresent()) {
+            if (userRepository.findUserByEmail(userDTO.getEmail()).isPresent()) {
                 logger.warn("Attempted to update user ID {} with duplicate email: {}", userDTO.getId(), userDTO.getEmail());
                 throw new UserException("User record does not permit duplicates for email field: " + userDTO.getEmail());
             }
-            user.setEmail(userDTO.getEmail()); // Update email if changed
+            user.setEmail(userDTO.getEmail());
         }
 
         user.setName(userDTO.getName());
-        // Consider if password update should be a separate endpoint/process
-        // Only update password if provided and not empty?
         if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
             user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         }
-        user.setRole(role.get());
-        // Update timestamp? user.setTimeStamp(LocalDateTime.now());
+        user.setRole(role);
 
         User updatedUser = userRepository.save(user);
         logger.info("User updated successfully with ID: {}", updatedUser.getId());
         return updatedUser.getId();
     }
 
+    @Transactional
     public void deleteUser(Long id) throws UserException {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            logger.error("User not found for deletion with ID: {}", id);
-            throw new UserException("User not found with id field: " + id);
-        }
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("User not found for deletion with ID: {}", id);
+                    return new UserException("User not found with id field: " + id);
+                });
+        userRepository.delete(user);
         logger.info("User deleted successfully with ID: {}", id);
     }
 
     public List<UserViewDTO> findUserViewByRoleName(String roleName) throws UserException {
-        List<User> userList = userRepository.findUserByRoleName(roleName);
+        List<User> userList = userRepository.findUserByRoleName(roleName.toUpperCase());
         if (userList.isEmpty()) {
             logger.warn("No users found with role name: {}", roleName);
-            // Depending on requirements, maybe return empty list instead of throwing exception?
-            // throw new UserException("User not found with role name field: " + roleName);
         }
         return userList.stream()
-                .map(UserViewBuilder::generateDTOFromEntity)
+                .map(user -> {
+                    UserViewDTO dto = UserViewBuilder.generateDTOFromEntity(user);
+                    dto.setBlocked(user.isBlocked());
+                    dto.setBlockedReason(user.getBlockedReason());
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 
-    // This registration method seems redundant if createUser is used via API.
-    // If used internally, ensure password encoding happens.
-    public User register(User user) {
-        // Encrypt password before saving
+    @Transactional
+    public User register(User user) throws UserException {
+        if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
+            throw new UserException("Email already exists: " + user.getEmail());
+        }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if (user.getRole() == null) {
+            Role defaultRole = roleRepository.findByName("USER");
+            if(defaultRole == null) {
+                defaultRole = roleRepository.save(new Role("USER"));
+            }
+            user.setRole(defaultRole);
+        }
+        user.setTimeStamp(LocalDateTime.now());
         User savedUser = userRepository.save(user);
         logger.info("User registered internally with ID: {}", savedUser.getId());
         return savedUser;
     }
 
-    public AuthResponse login(User user) {
+    public AuthResponse login(User userLoginAttempt) throws UserException {
         try {
-            logger.info("Attempting authentication for user: {}", user.getEmail());
+            logger.info("Attempting authentication for user: {}", userLoginAttempt.getEmail());
+
+            User user = userRepository.findUserByEmail(userLoginAttempt.getEmail())
+                    .orElseThrow(() -> new BadCredentialsException("Invalid email or password."));
+
+            if (user.isBlocked()) {
+                logger.warn("Login attempt for blocked user {}: {}", user.getEmail(), user.getBlockedReason());
+                throw new DisabledException("Your account has been blocked. Reason: " + user.getBlockedReason());
+            }
+
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
+                    new UsernamePasswordAuthenticationToken(userLoginAttempt.getEmail(), userLoginAttempt.getPassword())
             );
 
-            if (authentication.isAuthenticated()) {
-                logger.info("Authentication successful for user: {}", user.getEmail());
-                Optional<User> existingUser = userRepository.findUserByEmail(user.getEmail());
-                if (existingUser.isPresent()) {
-                    User authenticatedUser = existingUser.get();
-                    logger.info("Generating token for user ID: {}", authenticatedUser.getId());
-                    // *** Pass user ID and email to generateToken ***
-                    String token = jwtService.generateToken(authenticatedUser.getId(), authenticatedUser.getEmail());
 
-                    return new AuthResponse(
-                            token,
-                            authenticatedUser.getId(),
-                            authenticatedUser.getEmail(),
-                            authenticatedUser.getRole().getName()
-                    );
-                }
-                logger.error("User {} authenticated but not found in repository!", user.getEmail());
-                throw new RuntimeException("User not found after authentication"); // Should ideally not happen
-            }
-            // Should not be reachable if authenticate throws exception on failure
-            logger.warn("Authentication failed for user {} but no exception was thrown.", user.getEmail());
-            throw new RuntimeException("Authentication failed");
+            logger.info("Authentication successful for user: {}", user.getEmail());
+            logger.info("Generating token for user ID: {}", user.getId());
+            String token = jwtService.generateToken(user.getId(), user.getEmail());
+
+            return new AuthResponse(
+                    token,
+                    user.getId(),
+                    user.getEmail(),
+                    user.getRole().getName()
+            );
+
         } catch (AuthenticationException e) {
-            logger.warn("Authentication failed for user {}: {}", user.getEmail(), e.getMessage());
-            throw new RuntimeException("Invalid email or password", e); // Propagate specific auth failure
+            logger.warn("Authentication failed for user {}: {}", userLoginAttempt.getEmail(), e.getMessage());
+            if (e instanceof DisabledException) {
+                throw new UserException(e.getMessage());
+            }
+            throw new UserException("Invalid email or password.");
         } catch (Exception e) {
-            // Catch other potential errors during login
-            logger.error("Unexpected error during login process for user {}: {}", user.getEmail(), e.getMessage(), e);
-            throw new RuntimeException("Login process failed", e);
+            logger.error("Unexpected error during login process for user {}: {}", userLoginAttempt.getEmail(), e.getMessage(), e);
+            throw new UserException("Login process failed due to an unexpected error.");
         }
+    }
+
+    @Transactional
+    public void blockUser(Long targetUserId, String reason, Long actionPerformingAdminId) throws UserException {
+        User admin = userRepository.findById(actionPerformingAdminId)
+                .orElseThrow(() -> new UserException("Performing admin user not found."));
+        if (!"ADMIN".equalsIgnoreCase(admin.getRole().getName())) {
+            throw new UserException("User " + actionPerformingAdminId + " is not authorized to block users.");
+        }
+
+        User userToBlock = userRepository.findById(targetUserId)
+                .orElseThrow(() -> new UserException("User to block not found with ID: " + targetUserId));
+
+        if (userToBlock.isBlocked()) {
+            logger.info("User {} is already blocked. Updating reason.", targetUserId);
+        }
+
+        userToBlock.setBlocked(true);
+        userToBlock.setBlockedReason(reason);
+        userToBlock.setBlockedAt(LocalDateTime.now());
+        userToBlock.setBlockedByAdminId(actionPerformingAdminId);
+        userRepository.save(userToBlock);
+        logger.info("User {} blocked by admin {} with reason: {}", targetUserId, actionPerformingAdminId, reason);
+    }
+
+    @Transactional
+    public void unblockUser(Long targetUserId, Long actionPerformingAdminId) throws UserException {
+        User admin = userRepository.findById(actionPerformingAdminId)
+                .orElseThrow(() -> new UserException("Performing admin user not found."));
+        if (!"ADMIN".equalsIgnoreCase(admin.getRole().getName())) {
+            throw new UserException("User " + actionPerformingAdminId + " is not authorized to unblock users.");
+        }
+
+        User userToUnblock = userRepository.findById(targetUserId)
+                .orElseThrow(() -> new UserException("User to unblock not found with ID: " + targetUserId));
+
+        if (!userToUnblock.isBlocked()) {
+            logger.info("User {} is already unblocked.", targetUserId);
+            return;
+        }
+
+        userToUnblock.setBlocked(false);
+        userToUnblock.setBlockedReason(null);
+        userToUnblock.setBlockedAt(null);
+        userRepository.save(userToUnblock);
+        logger.info("User {} unblocked by admin {}", targetUserId, actionPerformingAdminId);
+    }
+
+    public User getUserById(Long userId) throws UserException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserException("User not found with ID: " + userId));
     }
 }

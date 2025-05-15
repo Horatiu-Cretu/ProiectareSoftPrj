@@ -1,169 +1,179 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ReactionCountUpdateDTO;
 import com.example.demo.dto.postdto.PostDTO;
 import com.example.demo.dto.postdto.PostViewDTO;
 import com.example.demo.errorhandler.UserException;
 import com.example.demo.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid; // Import @Valid for DTO validation
-import org.slf4j.Logger; // Add Logging
-import org.slf4j.LoggerFactory; // Add Logging
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated; // For validating path/request params
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/posts")
-@Validated // Enables validation of path variables and request parameters
-public class PostController extends BaseController { // Inherit getCurrentUserId
+@RequestMapping("/api/m2/posts")
+@Validated
+public class PostController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(PostController.class);
     private final PostService postService;
 
-    // Constructor Injection
     public PostController(PostService postService) {
-        super(); // Call BaseController constructor
+        super();
         this.postService = postService;
     }
 
-    // --- Create Post ---
-    @PostMapping
-    public ResponseEntity<?> createPost(
-            @Valid @ModelAttribute PostDTO postDTO, // Use @ModelAttribute for file uploads, @Valid for validation
-            HttpServletRequest request) {
-        try {
-            Long userId = getCurrentUserId(request); // Get user ID from interceptor attribute
-            log.info("Received request to create post from user {}", userId);
-            PostViewDTO createdPost = postService.createPost(postDTO, userId);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
-        } catch (UserException e) {
-            log.warn("UserException during post creation: {}", e.getMessage());
-            // Determine status based on error message content (improve error handling for specific cases)
-            HttpStatus status = e.getMessage().toLowerCase().contains("not found") ? HttpStatus.NOT_FOUND : HttpStatus.BAD_REQUEST;
-            if (e.getMessage().toLowerCase().contains("authorized")) {
-                status = HttpStatus.UNAUTHORIZED;
-            }
-            return ResponseEntity.status(status).body(e.getMessage());
-        } catch (Exception e) {
-            log.error("Unexpected error creating post: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating post: " + e.getMessage());
+    private ResponseEntity<?> handleUserException(UserException e, String actionContext) {
+        log.error("Error during {}: {}", actionContext, e.getMessage());
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String lowerCaseMsg = e.getMessage().toLowerCase();
+
+        if (lowerCaseMsg.contains("not found")) {
+            status = HttpStatus.NOT_FOUND;
+        } else if (lowerCaseMsg.contains("not authorized") || lowerCaseMsg.contains("unauthorized")) {
+            status = HttpStatus.FORBIDDEN;
         }
+        return ResponseEntity.status(status).body(e.getMessage());
     }
 
-    // --- Update Post ---
-    @PutMapping("/{postId}")
-    public ResponseEntity<?> updatePost(
-            @PathVariable Long postId,
-            @Valid @ModelAttribute PostDTO postDTO, // Use @ModelAttribute for file uploads, @Valid for validation
+    @PostMapping
+    public ResponseEntity<?> createPost(
+            @Valid @ModelAttribute PostDTO postDTO,
             HttpServletRequest request) {
         try {
             Long userId = getCurrentUserId(request);
-            log.info("Received request to update post {} from user {}", postId, userId);
-            PostViewDTO updatedPost = postService.updatePost(postId, postDTO, userId);
-            return ResponseEntity.ok(updatedPost);
+            PostViewDTO createdPost = postService.createPost(postDTO, userId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
         } catch (UserException e) {
-            log.warn("UserException during post update for post {}: {}", postId, e.getMessage());
-            HttpStatus status = HttpStatus.BAD_REQUEST; // Default
-            String lowerCaseMsg = e.getMessage().toLowerCase();
-            if (lowerCaseMsg.contains("not found")) {
-                status = HttpStatus.NOT_FOUND;
-            } else if (lowerCaseMsg.contains("not authorized")) {
-                status = HttpStatus.FORBIDDEN; // Use 403 Forbidden for auth errors
-            }
-            return ResponseEntity.status(status).body(e.getMessage());
+            return handleUserException(e, "creating post for user " + request.getAttribute("userId"));
         } catch (Exception e) {
-            log.error("Unexpected error updating post {}: {}", postId, e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating post: " + e.getMessage());
+            log.error("Unexpected error creating post for user {}: {}", request.getAttribute("userId"), e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred while creating the post.");
         }
     }
 
-    // --- Delete Post ---
+    @PutMapping("/{postId}")
+    public ResponseEntity<?> updatePost(
+            @PathVariable Long postId,
+            @Valid @ModelAttribute PostDTO postDTO,
+            HttpServletRequest request) {
+        try {
+            Long userId = getCurrentUserId(request);
+            PostViewDTO updatedPost = postService.updatePost(postId, postDTO, userId);
+            return ResponseEntity.ok(updatedPost);
+        } catch (UserException e) {
+            return handleUserException(e, "updating post " + postId + " by user " + request.getAttribute("userId"));
+        } catch (Exception e) {
+            log.error("Unexpected error updating post {} by user {}: {}", postId, request.getAttribute("userId"), e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred while updating the post.");
+        }
+    }
+
     @DeleteMapping("/{postId}")
     public ResponseEntity<?> deletePost(
             @PathVariable Long postId,
             HttpServletRequest request) {
         try {
             Long userId = getCurrentUserId(request);
-            log.info("Received request to delete post {} from user {}", postId, userId);
             postService.deletePost(postId, userId);
-            return ResponseEntity.noContent().build(); // Standard 204 No Content for successful DELETE
+            return ResponseEntity.noContent().build();
         } catch (UserException e) {
-            log.warn("UserException during post deletion for post {}: {}", postId, e.getMessage());
-            HttpStatus status = HttpStatus.BAD_REQUEST; // Default
-            String lowerCaseMsg = e.getMessage().toLowerCase();
-            if (lowerCaseMsg.contains("not found")) {
-                status = HttpStatus.NOT_FOUND;
-            } else if (lowerCaseMsg.contains("not authorized")) {
-                status = HttpStatus.FORBIDDEN; // Use 403 Forbidden
-            }
-            return ResponseEntity.status(status).body(e.getMessage());
+            return handleUserException(e, "deleting post " + postId + " by user " + request.getAttribute("userId"));
         } catch (Exception e) {
-            log.error("Unexpected error deleting post {}: {}", postId, e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting post: " + e.getMessage());
+            log.error("Unexpected error deleting post {} by user {}: {}", postId, request.getAttribute("userId"), e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred while deleting the post.");
         }
     }
 
-    // --- Get All Posts (Public) ---
+    @DeleteMapping("/admin/posts/{postId}")
+    public ResponseEntity<?> deletePostAsAdmin(
+            @PathVariable Long postId,
+            HttpServletRequest request) {
+        try {
+            Long adminUserId = getCurrentUserId(request);
+            log.info("Admin {} attempting to delete post {} via M2 endpoint.", adminUserId, postId);
+            postService.deletePostAsAdmin(postId, adminUserId);
+            return ResponseEntity.noContent().build();
+        } catch (UserException e) {
+            log.error("Admin (ID: {}) error deleting post {}: {}", request.getAttribute("userId"), postId, e.getMessage());
+            return handleUserException(e, "admin deleting post " + postId);
+        } catch (Exception e) {
+            log.error("Unexpected admin error deleting post {}: {}", postId, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred during admin deletion of the post.");
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<PostViewDTO>> getAllPosts() {
-        log.debug("Received request to get all posts");
-        // Assuming public access - No userId needed from request
-        // Error handling could be added if service throws exceptions
         List<PostViewDTO> posts = postService.getAllPosts();
         return ResponseEntity.ok(posts);
     }
 
-    // --- Get Posts by User (Public) ---
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getPostsByUser(@PathVariable Long userId) {
-        log.debug("Received request to get posts for user {}", userId);
-        try {
-            // Assuming public access - No authenticated userId needed from request
-            List<PostViewDTO> posts = postService.getPostsByUser(userId);
-            return ResponseEntity.ok(posts);
-        } catch (UserException e) {
-            log.warn("UserException getting posts for user {}: {}", userId, e.getMessage());
-            // Handle case where the specified userId does not exist
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            log.error("Unexpected error retrieving posts for user {}: {}", userId, e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving posts: " + e.getMessage());
-        }
-    }
-
-    // --- Get Posts by Single Hashtag (Public) ---
-    @GetMapping("/hashtag/{hashtag}")
-    public ResponseEntity<List<PostViewDTO>> getPostsByHashtag(
-            @PathVariable String hashtag) {
-        log.debug("Received request to get posts for hashtag '{}'", hashtag);
-        // Assuming public access
-        List<PostViewDTO> posts = postService.getPostsByHashtag(hashtag); // Service handles normalization
+    @GetMapping("/by-reaction-count")
+    public ResponseEntity<List<PostViewDTO>> getAllPostsOrderByReactionCount() {
+        List<PostViewDTO> posts = postService.getAllPostsOrderByReactionCountDesc();
         return ResponseEntity.ok(posts);
     }
 
-    // --- Get Posts by Multiple Hashtags (Public) ---
+    @PutMapping("/{postId}/update-reaction-count")
+    public ResponseEntity<Void> updatePostReactionCountInternal(
+            @PathVariable Long postId,
+            @RequestBody ReactionCountUpdateDTO countDTO) {
+        try {
+            postService.updatePostReactionCount(postId, countDTO.getReactionCount());
+            return ResponseEntity.ok().build();
+        } catch (UserException e) {
+            log.error("Failed to update reaction count for post {}: {}", postId, e.getMessage());
+            if (e.getMessage().toLowerCase().contains("not found")) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (Exception e) {
+            log.error("Unexpected error updating reaction count for post {}: {}", postId, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getPostsByUser(@PathVariable Long userId) {
+        try {
+            List<PostViewDTO> posts = postService.getPostsByUser(userId);
+            return ResponseEntity.ok(posts);
+        } catch (UserException e) {
+            log.warn("Could not get posts for user {}: {}", userId, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            log.error("Error retrieving posts for user {}: {}", userId, e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving posts.");
+        }
+    }
+
+    @GetMapping("/hashtag/{hashtag}")
+    public ResponseEntity<List<PostViewDTO>> getPostsByHashtag(
+            @PathVariable String hashtag) {
+        List<PostViewDTO> posts = postService.getPostsByHashtag(hashtag);
+        return ResponseEntity.ok(posts);
+    }
+
     @GetMapping("/hashtags")
     public ResponseEntity<List<PostViewDTO>> getPostsByHashtags(
-            @RequestParam(required = false) List<String> tags) { // Make tags optional
-        log.debug("Received request to get posts for hashtags: {}", tags);
-        // Assuming public access
+            @RequestParam(required = false) List<String> tags) {
         if (tags == null || tags.isEmpty()) {
-            log.debug("No tags provided, returning empty list.");
-            return ResponseEntity.ok(List.of()); // Return empty list if no tags specified
+            return ResponseEntity.ok(List.of());
         }
         List<PostViewDTO> posts = postService.getPostsByHashtags(tags);
         return ResponseEntity.ok(posts);
     }
 
-    // --- Search Posts by Text (Public) ---
     @GetMapping("/search")
     public ResponseEntity<List<PostViewDTO>> searchPostsByText(
             @RequestParam String query) {
-        log.debug("Received request to search posts with query: '{}'", query);
-        // Assuming public access
         List<PostViewDTO> posts = postService.searchPostsByText(query);
         return ResponseEntity.ok(posts);
     }

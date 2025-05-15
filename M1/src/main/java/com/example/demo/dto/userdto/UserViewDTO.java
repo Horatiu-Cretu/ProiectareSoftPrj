@@ -10,12 +10,11 @@ import lombok.*;
 public class UserViewDTO implements Comparable<UserViewDTO>{
 
     private String name;
-
     private String email;
-
     private String roleName;
-
     private String timeStamp;
+    private boolean isBlocked;
+    private String blockedReason;
 
     @Override
     public int compareTo(UserViewDTO userViewDTO) {

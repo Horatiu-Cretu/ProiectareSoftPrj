@@ -20,20 +20,12 @@ public class PostBuilder {
 
     private static final Logger log = LoggerFactory.getLogger(PostBuilder.class);
 
-    // Removed HashtagRepository injection - Service layer should handle hashtag logic
-    // private final HashtagRepository hashtagRepository;
-    // public PostBuilder(HashtagRepository hashtagRepository) {
-    //     this.hashtagRepository = hashtagRepository;
-    // }
-
     public Post generateEntityFromDTO(PostDTO postDTO, User user) throws IOException {
         Post post = new Post();
         post.setContent(postDTO.getContent());
         post.setPostType(postDTO.getPostType());
         post.setUser(user);
-        // createdAt will be set by @PrePersist
 
-        // Handle Image
         MultipartFile imageFile = postDTO.getImage();
         if (imageFile != null && !imageFile.isEmpty()) {
             try {
@@ -41,17 +33,10 @@ public class PostBuilder {
                 log.debug("Image bytes set for new post");
             } catch (IOException e) {
                 log.error("IOException reading image bytes: {}", e.getMessage());
-                throw e; // Re-throw exception to be handled by the service/controller
+                throw e;
             }
         }
 
-        // Hashtag logic moved to PostService.
-        // The service will call findOrCreateHashtags and then set post.setHashtags()
-        // Set<Hashtag> hashtags = new HashSet<>();
-        // if (postDTO.getHashtags() != null) {
-        //    ... logic to find/create hashtags ...
-        // }
-        // post.setHashtags(hashtags); // Service layer will handle this
 
         return post;
     }

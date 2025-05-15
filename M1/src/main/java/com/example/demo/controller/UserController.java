@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.builder.userbuilder.UserBuilder;
-import com.example.demo.builder.userbuilder.UserViewBuilder;
 import com.example.demo.dto.authdto.AuthResponse;
 import com.example.demo.dto.userdto.UserDTO;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.errorhandler.UserException;
 import com.example.demo.repository.RoleRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.service.JWTService;
 import com.example.demo.service.UserService;
 import com.example.demo.validator.UserFieldValidator;
@@ -17,111 +14,127 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api/user")
-@RequiredArgsConstructor
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     private final UserService userService;
     private final JWTService jwtService;
     private final RoleRepository roleRepository;
 
+    @Autowired
+    public UserController(UserService userService, JWTService jwtService, RoleRepository roleRepository) {
+        this.userService = userService;
+        this.jwtService = jwtService;
+        this.roleRepository = roleRepository;
+    }
+
     @Transactional
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserDTO userDTO) throws UserException {
-        // Validate input fields
         List<String> errors = UserFieldValidator.validateInsertOrUpdate(userDTO);
         if (!errors.isEmpty()) {
             throw new UserException(String.join("; ", errors));
         }
 
-        // Create or get the role
-        Role role = roleRepository.findByName("USER");
-        if (role == null) {
-            role = new Role("USER");
-            role = roleRepository.save(role);
+        Role assignedRole;
+        String requestedRoleName = userDTO.getRoleName();
+
+        if (requestedRoleName != null && !requestedRoleName.trim().isEmpty()) {
+            String roleNameToFind = requestedRoleName.trim().toUpperCase();
+            assignedRole = roleRepository.findByName(roleNameToFind);
+
+            if (assignedRole == null) {
+                if (roleNameToFind.equals("ADMIN")) {
+                    logger.error("CRITICAL: ADMIN role specified during registration for {} but not found in database.", userDTO.getEmail());
+                    throw new UserException("Configuration error: ADMIN role not found. Cannot register admin.");
+                } else {
+                    logger.warn("Role '{}' requested by {} not found. Defaulting to USER role.", roleNameToFind, userDTO.getEmail());
+                    assignedRole = roleRepository.findByName("USER");
+                    if (assignedRole == null) {
+                        logger.info("USER role not found, creating it.");
+                        assignedRole = roleRepository.save(new Role("USER"));
+                    }
+                }
+            }
+        } else {
+            assignedRole = roleRepository.findByName("USER");
+            if (assignedRole == null) {
+                logger.info("USER role not found, creating it.");
+                assignedRole = roleRepository.save(new Role("USER"));
+            }
         }
 
-        // Convert DTO to User entity
-        User user = UserBuilder.generateEntityFromDTO(userDTO, role);
-        user.setTimeStamp(LocalDateTime.now());
-
-        // Save user
+        User user = UserBuilder.generateEntityFromDTO(userDTO, assignedRole);
         userService.register(user);
 
-        // Return simple success message
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("User registered successfully");
+                .body("User registered successfully with role: " + assignedRole.getName());
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody User user) {
+    public ResponseEntity<AuthResponse> login(@RequestBody User user) throws UserException {
         AuthResponse response = userService.login(user);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
-        // Clear the security context
         SecurityContextHolder.clearContext();
-
-        // Invalidate the session
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-
         return ResponseEntity.ok("Logged out successfully");
     }
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public ResponseEntity<?> displayAllUserView(){
+    @GetMapping("/getAll")
+    public ResponseEntity<?> displayAllUserView() {
         return new ResponseEntity<>(userService.findAllUserView(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getUserById/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> displayUserViewById(@PathVariable("id") @NonNull  Long id) throws UserException {
+    @GetMapping("/getUserById/{id}")
+    public ResponseEntity<?> displayUserViewById(@PathVariable("id") @NonNull Long id) throws UserException {
         return new ResponseEntity<>(userService.findUserViewById(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getUserByEmail/{email}", method = RequestMethod.GET)
+    @GetMapping("/getUserByEmail/{email}")
     public ResponseEntity<?> displayUserViewByEmail(@PathVariable("email") String email) throws UserException {
         return new ResponseEntity<>(userService.findUserViewByEmail(email), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getUserByRoleName/{roleName}", method = RequestMethod.GET)
+    @GetMapping("/getUserByRoleName/{roleName}")
     public ResponseEntity<?> displayUserViewByRoleName(@PathVariable("roleName") String roleName) throws UserException {
         return new ResponseEntity<>(userService.findUserViewByRoleName(roleName), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value = "/create")
-    public ResponseEntity<?> processAddUserForm(@RequestBody(required = false) UserDTO userDTO) throws UserException {
-        return new ResponseEntity<>(userService.createUser(userDTO), HttpStatus.OK);
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> processAddUserForm(@RequestBody UserDTO userDTO) throws UserException {
+        return new ResponseEntity<>(userService.createUser(userDTO), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, value = "/update")
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> processUpdateUserForm(@RequestBody UserDTO userDTO) throws UserException {
         return new ResponseEntity<>(userService.updateUser(userDTO), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserByIdForm(@PathVariable("id") Long id) throws UserException {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

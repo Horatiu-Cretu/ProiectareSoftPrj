@@ -4,136 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6624b52-5590-4e7b-8aa8-ed32fb93117b" name="Changes" comment="Added comments immplementations">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="b6624b52-5590-4e7b-8aa8-ed32fb93117b" name="Changes" comment="Introduce authentication, request forwarding, and DTO handling&#10;&#10;Added JWT-based authentication in M2 via JwtAuthenticationFilter and JwtInterceptor. Introduced new DTOs, builders, and forwarding controllers in M1 to handle user, comment, and friend request operations. Established REST communication patterns for seamless integration between M1 and M2 services.">
+      <change afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/forwardingdto/PostDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/forwardingdto/PostViewDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/5d18c37d-6a1a-4641-b509-3eb786dceded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/5d18c37d-6a1a-4641-b509-3eb786dceded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/922ed0da-0546-433a-8b1e-4aaf03d02819.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/922ed0da-0546-433a-8b1e-4aaf03d02819.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/M1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/config/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/config/JwtFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/FriendRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/FriendRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/friendrequesdto/FriendRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/friendrequesdto/FriendRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/forwardingControllers/BaseForwardingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/forwardingControllers/BaseForwardingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/forwardingControllers/CommentForwardingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/forwardingControllers/CommentForwardingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/forwardingControllers/PostForwardingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/controller/forwardingControllers/PostForwardingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/CommentViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/forwardingdto/CommentViewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/PostDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/PostViewDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/userdto/UserViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/dto/userdto/UserViewDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/FriendRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/FriendRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/PostType.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/PostType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/repository/FriendRequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/repository/FriendRequestRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/FriendRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/FriendRequestService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/JWTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/JWTService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/validator/UserFieldValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/java/com/example/demo/validator/UserFieldValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M1/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/config/SecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserViewDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/dto/userdto/UserViewDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/entity/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1.war" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1.war.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/DemoApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/builder/userbuilder/UserViewBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO$RoleDTOBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/roledto/RoleDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO$UserDTOBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO$UserViewDTOBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/dto/userdto/UserViewDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role$RoleBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User$UserBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/DemoException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/ExceptionControllerHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse$HttpErrorResponseBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/HttpErrorResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/errorhandler/UserException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/RoleRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/classes/com/example/demo/validator/UserFieldValidator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/HikariCP-5.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/angus-activation-2.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/antlr4-runtime-4.10.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/aspectjweaver-1.9.19.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/byte-buddy-1.14.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/classmate-1.5.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/h2-2.2.220.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/hibernate-commons-annotations-6.0.6.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/hibernate-core-6.2.6.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/hsqldb-2.7.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/istack-commons-runtime-4.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-annotations-2.15.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-core-2.15.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-databind-2.15.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jdk8-2.15.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-datatype-jsr310-2.15.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jackson-module-parameter-names-2.15.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.activation-api-2.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.annotation-api-2.1.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.inject-api-2.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.transaction-api-2.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jakarta.xml.bind-api-4.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jandex-3.0.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jaxb-core-4.0.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jaxb-runtime-4.0.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jboss-logging-3.5.3.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/jul-to-slf4j-2.0.7.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/log4j-api-2.20.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/log4j-to-slf4j-2.20.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/logback-classic-1.4.8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/logback-core-1.4.8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/micrometer-commons-1.11.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/micrometer-observation-1.11.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/mysql-connector-j-8.2.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/slf4j-api-2.0.7.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/snakeyaml-1.33.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-aop-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-aspects-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-beans-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-autoconfigure-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-aop-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-data-jpa-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-jdbc-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-json-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-logging-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-tomcat-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-boot-starter-web-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-context-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-core-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-data-commons-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-data-jpa-3.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-expression-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-jcl-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-jdbc-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-orm-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-tx-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-web-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/spring-webmvc-6.0.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-core-10.1.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-el-10.1.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/tomcat-embed-websocket-10.1.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/demo-0.0.1/WEB-INF/lib/txw2-4.0.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/test-classes/application-db-mem.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/DemoApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/service/BaseTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/service/UserServiceTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M1/target/test-classes/com/example/demo/utils/DataTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/M2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/DemoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M1/target/classes/com/example/demo/validator/UserFieldValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/M1/target/classes/com/example/demo/validator/UserFieldValidator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/commentbuilder/CommentBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/commentbuilder/CommentBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/commentbuilder/CommentViewBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/commentbuilder/CommentViewBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/postbuilder/PostBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/postbuilder/PostBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/postbuilder/PostViewBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/builder/postbuilder/PostViewBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/BaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/controller/UserController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/dto/commentdto/CommentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/dto/commentdto/CommentDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/dto/commentdto/CommentViewDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/dto/commentdto/CommentViewDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/dto/postdto/PostDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/dto/postdto/PostDTO.java" afterDir="false" />
@@ -141,23 +57,16 @@
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/entity/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/entity/Hashtag.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/entity/Hashtag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/entity/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/interceptor/JwtInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/interceptor/JwtInterceptor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/repository/CommentRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/repository/PostRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/CommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/java/com/example/demo/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M2/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/M2/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/classes/com/example/demo/DemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/DemoApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/classes/com/example/demo/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/classes/com/example/demo/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/demo-0.0.1.war" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/demo-0.0.1.war.original" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1.war.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/demo-0.0.1/WEB-INF/classes/com/example/demo/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/M2/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/M3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M3/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/M3/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/M3/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,8 +78,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Record" />
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -191,7 +100,7 @@
   }
 }</component>
   <component name="HttpClientEndpointsTabState">
-    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;d5dfceaaf8f2d9aedac23083d225cd586ac9b8ea&quot; value=&quot;###&amp;#10;POST http://localhost:8082/api/posts&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;content&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;image&amp;quot;: {},&amp;#10;  &amp;quot;postType&amp;quot;: &amp;quot;TEXT&amp;quot;,&amp;#10;  &amp;quot;hashtags&amp;quot;: []&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;11b9f3b01dd3216443965fc7c048008107c7c12e&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/posts&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;&amp;quot;&amp;quot;&quot; /&gt;&#10;  &lt;entry key=&quot;022809ce625091d1af48c42b07066fca8fcf9af9&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/user/register&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;id&amp;quot;: 0,&amp;#10;  &amp;quot;name&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;email&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;password&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;roleName&amp;quot;: &amp;quot;&amp;quot;&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;837ae5faa904c01fe744b9d4c9843474039b4f1e&quot; value=&quot;###&amp;#10;PUT http://localhost:8081/api/posts/{{postId}}&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;&amp;quot;&amp;quot;&quot; /&gt;&#10;  &lt;entry key=&quot;521d4b255c9fb668efc947fb4f4315d261dc4812&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/user/login&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;id&amp;quot;: 0,&amp;#10;  &amp;quot;name&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;email&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;password&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;timeStamp&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;role&amp;quot;: {}&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;c7d325acb86727a19a722d68d2a1ab7a51cde2e2&quot; value=&quot;###&amp;#10;GET http://localhost:8081/api/posts&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;d5dfceaaf8f2d9aedac23083d225cd586ac9b8ea&quot; value=&quot;###&amp;#10;POST http://localhost:8082/api/posts&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;content&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;image&amp;quot;: {},&amp;#10;  &amp;quot;postType&amp;quot;: &amp;quot;TEXT&amp;quot;,&amp;#10;  &amp;quot;hashtags&amp;quot;: []&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;11b9f3b01dd3216443965fc7c048008107c7c12e&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/posts&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;&amp;quot;&amp;quot;&quot; /&gt;&#10;  &lt;entry key=&quot;022809ce625091d1af48c42b07066fca8fcf9af9&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/user/register&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;id&amp;quot;: 0,&amp;#10;  &amp;quot;name&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;email&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;password&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;roleName&amp;quot;: &amp;quot;&amp;quot;&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;837ae5faa904c01fe744b9d4c9843474039b4f1e&quot; value=&quot;###&amp;#10;PUT http://localhost:8081/api/posts/{{postId}}&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;&amp;quot;&amp;quot;&quot; /&gt;&#10;  &lt;entry key=&quot;308d83b02ad65e87c7a0efe84eccc05e85f844ea&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/reactions&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;521d4b255c9fb668efc947fb4f4315d261dc4812&quot; value=&quot;###&amp;#10;POST http://localhost:8081/api/user/login&amp;#10;Content-Type: application/json&amp;#10;&amp;#10;{&amp;#10;  &amp;quot;id&amp;quot;: 0,&amp;#10;  &amp;quot;name&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;email&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;password&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;timeStamp&amp;quot;: &amp;quot;&amp;quot;,&amp;#10;  &amp;quot;role&amp;quot;: {}&amp;#10;}&quot; /&gt;&#10;  &lt;entry key=&quot;c7d325acb86727a19a722d68d2a1ab7a51cde2e2&quot; value=&quot;###&amp;#10;GET http://localhost:8081/api/posts&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
   </component>
   <component name="MavenRunner">
     <option name="skipTests" value="true" />
@@ -257,8 +166,11 @@
       <recent name="com.example.demo.dto" />
       <recent name="com.example.demo.config" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.demo.config" />
+    </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.DemoApplication (1)">
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
     <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -360,6 +272,15 @@
       <workItem from="1745845832015" duration="660000" />
       <workItem from="1745994656148" duration="22000" />
       <workItem from="1745994690717" duration="10372000" />
+      <workItem from="1746007489303" duration="5487000" />
+      <workItem from="1746025786954" duration="106000" />
+      <workItem from="1746042041864" duration="678000" />
+      <workItem from="1746463788298" duration="451000" />
+      <workItem from="1746620285356" duration="1909000" />
+      <workItem from="1746894596161" duration="12841000" />
+      <workItem from="1747231489127" duration="3592000" />
+      <workItem from="1747333456049" duration="10934000" />
+      <workItem from="1747346378550" duration="3161000" />
     </task>
     <task id="LOCAL-00001" summary="Added Register Login and friedRequests">
       <option name="closed" value="true" />
@@ -393,7 +314,31 @@
       <option name="project" value="LOCAL" />
       <updated>1744803103187</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Assigment 2 full implementation">
+      <option name="closed" value="true" />
+      <created>1746007664190</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746007664190</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added Updated README.md file">
+      <option name="closed" value="true" />
+      <created>1746007897746</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1746007897746</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Introduce authentication, request forwarding, and DTO handling&#10;&#10;Added JWT-based authentication in M2 via JwtAuthenticationFilter and JwtInterceptor. Introduced new DTOs, builders, and forwarding controllers in M1 to handle user, comment, and friend request operations. Established REST communication patterns for seamless integration between M1 and M2 services.">
+      <option name="closed" value="true" />
+      <created>1746007990292</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746007990292</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +359,10 @@
     <MESSAGE value="Added Register Login and friedRequests" />
     <MESSAGE value="Added posts with hashtag usecases" />
     <MESSAGE value="Added comments immplementations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added comments immplementations" />
+    <MESSAGE value="Added Assigment 2 full implementation" />
+    <MESSAGE value="Added Updated README.md file" />
+    <MESSAGE value="Introduce authentication, request forwarding, and DTO handling&#10;&#10;Added JWT-based authentication in M2 via JwtAuthenticationFilter and JwtInterceptor. Introduced new DTOs, builders, and forwarding controllers in M1 to handle user, comment, and friend request operations. Established REST communication patterns for seamless integration between M1 and M2 services." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduce authentication, request forwarding, and DTO handling&#10;&#10;Added JWT-based authentication in M2 via JwtAuthenticationFilter and JwtInterceptor. Introduced new DTOs, builders, and forwarding controllers in M1 to handle user, comment, and friend request operations. Established REST communication patterns for seamless integration between M1 and M2 services." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

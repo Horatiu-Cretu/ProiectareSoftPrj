@@ -22,30 +22,16 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(
-            name = "id",
-            updatable = false
-    )
+    @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(
-            name = "name",
-            nullable = false,
-            length = 100
-    )
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(
-            name = "email",
-            nullable = false,
-            unique = true
-    )
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(
-            name = "password",
-            nullable = false
-    )
+    @Column(name = "password", nullable = false)
     private String password;
 
     @JsonFormat(pattern = "MM-dd-yyy hh:mm:ss")
@@ -57,51 +43,15 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "is_blocked", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean isBlocked = false;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "blocked_reason", length = 500)
+    private String blockedReason;
 
-    public String getName() {
-        return name;
-    }
+    @Column(name = "blocked_at")
+    private LocalDateTime blockedAt;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    @Column(name = "blocked_by_admin_id")
+    private Long blockedByAdminId;
 }

@@ -19,7 +19,6 @@ package com.example.demo.service;
             private final UserRepository userRepository;
 
             public FriendRequestDTO sendFriendRequest(Long senderId, Long receiverId) throws UserException {
-                // Validate users exist
                 if (!userRepository.existsById(senderId)) {
                     throw new UserException("Sender not found");
                 }
@@ -27,12 +26,10 @@ package com.example.demo.service;
                     throw new UserException("Receiver not found");
                 }
 
-                // Check if request already exists
                 if (friendRequestRepository.existsBySenderIdAndReceiverId(senderId, receiverId)) {
                     throw new UserException("Friend request already exists");
                 }
 
-                // Check if they're already friends
                 if (areFriends(senderId, receiverId)) {
                     throw new UserException("Users are already friends");
                 }
@@ -45,16 +42,15 @@ package com.example.demo.service;
                 FriendRequest request = friendRequestRepository.findById(requestId)
                     .orElseThrow(() -> new UserException("Friend request not found"));
 
-                // Verify the receiver is the one accepting the request
                 if (!request.getReceiverId().equals(receiverId)) {
                     throw new UserException("Unauthorized to accept this request");
                 }
 
-                if (request.getStatus() != 1) { // 1 = PENDING
+                if (request.getStatus() != 1) {
                     throw new UserException("Request is not pending");
                 }
 
-                request.setStatus(2); // 2 = ACCEPTED
+                request.setStatus(2);
                 return convertToDTO(friendRequestRepository.save(request));
             }
 
@@ -62,16 +58,15 @@ package com.example.demo.service;
                 FriendRequest request = friendRequestRepository.findById(requestId)
                     .orElseThrow(() -> new UserException("Friend request not found"));
 
-                // Verify the receiver is the one rejecting the request
                 if (!request.getReceiverId().equals(receiverId)) {
                     throw new UserException("Unauthorized to reject this request");
                 }
 
-                if (request.getStatus() != 1) { // 1 = PENDING
+                if (request.getStatus() != 1) {
                     throw new UserException("Request is not pending");
                 }
 
-                request.setStatus(3); // 3 = REJECTED
+                request.setStatus(3);
                 return convertToDTO(friendRequestRepository.save(request));
             }
 

@@ -10,11 +10,12 @@ import com.example.demo.entity.User;
 import com.example.demo.errorhandler.UserException;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.PostRepository;
-import org.slf4j.Logger; // Add logging
-import org.slf4j.LoggerFactory; // Add logging
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import jakarta.transaction.Transactional; // Use jakarta.transaction.Transactional
-import java.util.Base64; // For Base64 decoding
+import jakarta.transaction.Transactional; // Corectat importul
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,93 +28,86 @@ public class CommentService {
     private final UserService userService;
     private final PostRepository postRepository;
     private final CommentBuilder commentBuilder;
+    private final PostService postService;
 
-    public CommentService(CommentRepository commentRepository, UserService userService,
-                          PostRepository postRepository, CommentBuilder commentBuilder) {
+    public CommentService(CommentRepository commentRepository,
+                          @Lazy UserService userService,
+                          PostRepository postRepository,
+                          CommentBuilder commentBuilder,
+                          @Lazy PostService postService) {
         this.commentRepository = commentRepository;
         this.userService = userService;
         this.postRepository = postRepository;
         this.commentBuilder = commentBuilder;
+        this.postService = postService;
     }
 
     @Transactional
     public CommentViewDTO createComment(Long postId, CommentDTO commentDTO, Long userId) throws UserException {
-        log.info("User {} attempting to comment on post {}", userId, postId);
         User user = userService.getUserById(userId);
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> {
-                    log.warn("Post not found: {}", postId);
-                    return new UserException("Post not found with id: " + postId);
-                });
-
-        // Use builder (ensure it handles optional Base64 image)
+                .orElseThrow(() -> new UserException("Post not found with id: " + postId));
         Comment comment = commentBuilder.generateEntityFromDTO(commentDTO, user, post);
-
+        comment.setReactionCount(0);
         Comment savedComment = commentRepository.save(comment);
-        log.info("Comment {} created successfully on post {} by user {}", savedComment.getId(), postId, userId);
+
+        try {
+            postService.recalculateAndSaveAggregateReactionsForPost(post.getId());
+        } catch (UserException e) {
+            log.error("Failed to trigger aggregate reaction update for post {} after new comment {} creation: {}",
+                    post.getId(), savedComment.getId(), e.getMessage());
+        }
         return CommentViewBuilder.generateDTOFromEntity(savedComment);
     }
 
-    // Optional: Update Comment (User didn't explicitly ask, but code exists)
     @Transactional
     public CommentViewDTO updateComment(Long commentId, CommentDTO commentDTO, Long userId) throws UserException {
-        log.info("User {} attempting to update comment {}", userId, commentId);
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new UserException("Comment not found with id: " + commentId));
-
-        // --- Ownership Check ---
         if (!comment.getUser().getId().equals(userId)) {
-            log.warn("User {} attempted to update comment {} owned by {}", userId, commentId, comment.getUser().getId());
             throw new UserException("Not authorized to update this comment");
         }
-
         comment.setContent(commentDTO.getContent());
-
-        // Handle optional image update from Base64
         if (commentDTO.getImageBase64() != null) {
             if (commentDTO.getImageBase64().isEmpty()) {
-                comment.setImage(null); // Clear image if empty string provided
-                log.debug("Clearing image for comment {}", commentId);
+                comment.setImage(null);
             } else {
                 try {
                     comment.setImage(Base64.getDecoder().decode(commentDTO.getImageBase64()));
-                    log.debug("Updating image for comment {}", commentId);
                 } catch (IllegalArgumentException e) {
-                    log.error("Invalid Base64 image data received for comment update {}: {}", commentId, e.getMessage());
                     throw new UserException("Invalid image data format.");
                 }
             }
         }
-        // updatedAt handled by @PreUpdate
-
         Comment savedComment = commentRepository.save(comment);
-        log.info("Comment {} updated successfully by user {}", commentId, userId);
         return CommentViewBuilder.generateDTOFromEntity(savedComment);
     }
 
     @Transactional
     public void deleteComment(Long commentId, Long userId) throws UserException {
-        log.info("User {} attempting to delete comment {}", userId, commentId);
-
-        // Fetch comment first for ownership check
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new UserException("Comment not found with id: " + commentId));
-
-        // --- Ownership Check ---
         if (!comment.getUser().getId().equals(userId)) {
-            log.warn("User {} attempted to delete comment {} owned by {}", userId, commentId, comment.getUser().getId());
             throw new UserException("Not authorized to delete this comment");
         }
+        Long parentPostId = comment.getPost() != null ? comment.getPost().getId() : null;
 
-        commentRepository.delete(comment); // Use delete(entity) or deleteById
-        log.info("Comment {} deleted successfully by user {}", commentId, userId);
+        commentRepository.delete(comment);
+        log.info("User {} deleted comment {}", userId, commentId);
+
+
+        if (parentPostId != null) {
+            try {
+                postService.recalculateAndSaveAggregateReactionsForPost(parentPostId);
+            } catch (UserException e) {
+                log.error("Failed to trigger aggregate reaction update for post {} after comment {} deletion by user: {}",
+                        parentPostId, commentId, e.getMessage());
+            }
+        }
     }
 
-    // Get comments for a specific post
-    @Transactional(Transactional.TxType.SUPPORTS) // Read-only if possible
+    @Transactional(Transactional.TxType.SUPPORTS)
     public List<CommentViewDTO> getCommentsByPost(Long postId) throws UserException {
-        log.debug("Fetching comments for post {}", postId);
-        // Optional: Check if post exists first
         if (!postRepository.existsById(postId)) {
             throw new UserException("Post not found with id: " + postId);
         }
@@ -123,10 +117,32 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    // Get comments formatted as string (as requested originally)
+
+    @Transactional
+    public void updateCommentReactionCount(Long commentId, int newCommentReactionCount) throws UserException {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new UserException("Comment not found with id: " + commentId + " when trying to update reaction count."));
+
+        comment.setReactionCount(newCommentReactionCount);
+        Comment savedComment = commentRepository.save(comment);
+        log.info("Updated reaction count for comment {} to {}", commentId, newCommentReactionCount);
+
+        if (savedComment.getPost() != null) {
+            try {
+                log.debug("Triggering aggregate recalculation for post {} due to comment {} reaction update.",
+                        savedComment.getPost().getId(), commentId);
+                postService.recalculateAndSaveAggregateReactionsForPost(savedComment.getPost().getId());
+            } catch (UserException e) {
+                log.error("Failed to trigger aggregate reaction update for post {} after comment {} reaction update: {}",
+                        savedComment.getPost().getId(), commentId, e.getMessage());
+            }
+        } else {
+            log.warn("Comment {} does not have an associated post. Cannot trigger aggregate update for parent post.", commentId);
+        }
+    }
+
     @Transactional(Transactional.TxType.SUPPORTS)
     public String getFormattedCommentsByPost(Long postId) throws UserException {
-        log.debug("Fetching formatted comments for post {}", postId);
         if (!postRepository.existsById(postId)) {
             throw new UserException("Post not found with id: " + postId);
         }
@@ -134,16 +150,38 @@ public class CommentService {
         if (comments.isEmpty()) {
             return "No comments found for this post.";
         }
-
         StringBuilder result = new StringBuilder();
-        for (Comment comment : comments) {
-            result.append("Comment ID: ").append(comment.getId())
-                    .append("\nAuthor ID: ").append(comment.getUser().getId()) // Assuming User entity is loaded or ID accessible
-                    .append("\nContent: ").append(comment.getContent())
-                    .append("\nCreated At: ").append(comment.getCreatedAt()) // Consider formatting the date/time
-                    .append(comment.getImage() != null ? "\n(Image attached)" : "") // Indicate if image exists
+        for (Comment commentEntity : comments) {
+            result.append("Comment ID: ").append(commentEntity.getId())
+                    .append("\nAuthor ID: ").append(commentEntity.getUser() != null ? commentEntity.getUser().getId() : "N/A")
+                    .append("\nContent: ").append(commentEntity.getContent())
+                    .append("\nCreated At: ").append(commentEntity.getCreatedAt())
+                    .append("\nReactions: ").append(commentEntity.getReactionCount())
+                    .append(commentEntity.getImage() != null && commentEntity.getImage().length > 0 ? "\n(Image attached)" : "")
                     .append("\n-------------------\n");
         }
         return result.toString();
+    }
+
+    @Transactional
+    public void deleteCommentAsAdmin(Long commentId, Long adminUserId) throws UserException {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new UserException("Comment not found with id: " + commentId));
+
+        Long parentPostId = comment.getPost() != null ? comment.getPost().getId() : null;
+        Long originalAuthorId = comment.getUser() != null ? comment.getUser().getId() : null;
+
+        commentRepository.delete(comment);
+        log.info("Admin {} deleted comment {} (original author ID: {})", adminUserId, commentId, originalAuthorId != null ? originalAuthorId : "N/A");
+
+        if (parentPostId != null) {
+            try {
+                log.info("Triggering aggregate reaction update for post {} after admin deleted comment {}", parentPostId, commentId);
+                postService.recalculateAndSaveAggregateReactionsForPost(parentPostId);
+            } catch (UserException e) {
+                log.error("Failed to trigger aggregate reaction update for post {} after admin deleted comment {}: {}",
+                        parentPostId, commentId, e.getMessage());
+            }
+        }
     }
 }

@@ -1,10 +1,12 @@
 package com.example.demo.controller.forwardingControllers;
 
-import com.example.demo.dto.CommentViewDTO;
+import com.example.demo.dto.forwardingdto.CommentViewDTO;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -38,9 +40,10 @@ public class CommentForwardingController extends BaseForwardingController {
     }
 
     @GetMapping("/post/{postId}")
-    public ResponseEntity<String> getFormattedCommentsByPost(
+    public ResponseEntity<List<CommentViewDTO>> getCommentsByPost(
             @PathVariable Long postId,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
-        return forwardGet("/post/" + postId, authHeader, String.class);
+        return forwardGet("/post/" + postId, authHeader, new ParameterizedTypeReference<List<CommentViewDTO>>() {});
     }
+
 }

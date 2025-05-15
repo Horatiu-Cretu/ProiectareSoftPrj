@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.dto.forwardingdto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -8,20 +8,20 @@ import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor // Needed for Jackson deserialization
+@NoArgsConstructor
 @AllArgsConstructor
 public class CommentViewDTO {
     private Long id;
     private String content;
-    private String imageBase64; // Expect image as Base64 from M2
+    private String imageBase64;
 
-    // Ensure M1's Jackson can handle this format (default should be fine)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt; // Add updatedAt to match M2's DTO
+    private LocalDateTime updatedAt;
 
     private Long userId;
     private Long postId;
+    private int reactionCount;
 }
